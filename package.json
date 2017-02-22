@@ -1,6 +1,6 @@
 {
   "name": "coding-ide-public-url",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.02",
   "description": "Extension for Coding WebIDE, enable sharing via public URL",
   "repository": {
     "type": "git",
