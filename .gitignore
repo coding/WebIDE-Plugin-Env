@@ -2,6 +2,5 @@ node_modules
 *.log
 *.bak
 .idea
-dist
 public/
 packages/
