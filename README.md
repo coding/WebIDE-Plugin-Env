@@ -1,1 +1,2 @@
-# WebIde Extensions Component
+# WebIde Extension coding-ide-public-url
+

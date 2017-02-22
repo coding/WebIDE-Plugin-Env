@@ -22,11 +22,9 @@ CountApp.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  console.log('123');
   const {
     ExtensionState: { feature1Counts = 0 } = {},
   } = state;
   return ({ counts: feature1Counts });
-  // return ({})
 };
 export default connect(mapStateToProps)(CountApp);

@@ -8,16 +8,11 @@ const webpackConfig = require('./webpack.dev.config');
 
 const PORT = process.env.PORT || 4000;
 
-const corsOptions = {
-  origin: true,
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use(require('webpack-dev-middleware')(require('webpack')(webpackConfig), {
-  publicPath: '/public',
+  publicPath: '/static',
   hot: true,
   historyApiFallback: true,
   quiet: false,
@@ -37,6 +32,6 @@ app.use(require('webpack-dev-middleware')(require('webpack')(webpackConfig), {
 app.use(require('webpack-hot-middleware')(require('webpack')(webpackConfig)));
 
 app.listen(PORT, () => {
-  console.log(`listen ${PORT}`);
+  console.log(`build server serve at localhost:${PORT}/static/`);
 });
 
