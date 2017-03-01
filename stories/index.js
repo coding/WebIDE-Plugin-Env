@@ -1,12 +1,10 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
-import {
-  CountApp,
-} from '../src/CountApp';
+import { storiesOf, action } from '@kadira/storybook';
+import CountApp from '../src/app';
 
 storiesOf('Form', module)
   .add('Basic', () => (
     <div>
-      <CountApp></CountApp>
+      <CountApp onClickDebug={action('button clicked')} />
     </div>
   ));

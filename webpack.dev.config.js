@@ -11,15 +11,29 @@ module.exports = {
     filename: `${name}.js`,
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx'],
     modules: [
       'src/',
       'node_modules',
     ],
   },
+  resolveLoader: {
+    modules: [path.resolve(__dirname, 'loaders／'), 'node_modules'],
+  },
   module: {
     rules: [
       { test: /\.jsx?$/, exclude: /node_modules/, use: ['babel-loader'] },
+      { test: /\.styl$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'style-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   plugins: [

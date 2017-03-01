@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 const CountApp = props => (
   <div
+    name="test count app"
     onClick={() => {
       props.dispatch({ type: 'ADD' });
       if (props.onClickDebug) return props.onClickDebug();
