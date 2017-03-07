@@ -27,7 +27,7 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'style-loader',
+          'stylus-loader',
         ],
       },
       {
