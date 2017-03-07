@@ -184,9 +184,7 @@ EnvList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const {
-    ExtensionState: { envList = [], currentEnv = null, operating, operatingMessage } = {},
-  } = state;
+  const { envList = [], currentEnv = null, operating, operatingMessage } = state;
   return ({ 
     envList,
     currentEnv,

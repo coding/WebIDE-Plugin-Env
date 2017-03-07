@@ -11,7 +11,6 @@ const composeReducers = (...args) => {
 };
 
 export const getStoreByReducer = (reducer) => {
-  if (window.store) return window.store;
   const store = createStore(
     composeReducers(reducer),
     compose(

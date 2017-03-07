@@ -1,7 +1,7 @@
 {
   "name": "coding-ide-public-url",
   "version": "0.0.1-alpha.02",
-  "description": "Extension demo for Coding WebIDE",
+  "description": "Extension env for Coding WebIDE",
   "repository": {
     "url": "https://github.com/you/repo.git"
   },
@@ -12,7 +12,7 @@
     "clean": "rimraf .out",
     "prebuild": "npm install",
     "storybook": "start-storybook -p 9010",
-    "dev": "NODE_ENV=development babel-node server.js",
+    "dev": "NODE_ENV=development nodemon --watch package.json --watch server.js --exec babel-node server.js",
     "build": "NODE_ENV=production webpack --config webpack.production.config.js --progress --profile --colors"
   },
   "codingPackage": {
