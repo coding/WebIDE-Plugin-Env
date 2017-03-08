@@ -3,13 +3,16 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
-const name = require('package.json').codingPackage.name;
+const config = require('./package.json');
+
+const version = config.codingIdePackage.version || config.version;
+
 
 module.exports = {
   entry: './src',
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: `${name}_[chunkhash].js`,
+    path: path.join(__dirname, 'dist', version),
+    filename: 'index.js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -21,6 +24,17 @@ module.exports = {
   module: {
     rules: [
       { test: /\.jsx?$/, exclude: /node_modules/, use: ['babel-loader'] },
+      { test: /\.styl$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'stylus-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   plugins: [

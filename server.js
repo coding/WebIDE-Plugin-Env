@@ -10,7 +10,7 @@ const compiler = require('webpack')(webpackConfig);
 
 
 io.on('connection', (socket) => {
-  console.log('connect ' + socket.id);
+  console.log('hotreload socket server started ,connectid' + socket.id);
   socket.on('change', () => {
     socket.broadcast.emit('onchange');
   });
@@ -23,7 +23,7 @@ const corsOptions = {
   optionsSuccessStatus: 200,
   credentials: true,
 };
-const codingPackage = require('./package.json').codingPackage;
+const codingPackage = require('./package.json').codingIdePackage;
 
 
 app.use(cors(corsOptions));
