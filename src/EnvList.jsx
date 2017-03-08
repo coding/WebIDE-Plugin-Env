@@ -184,7 +184,12 @@ EnvList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { envList = [], currentEnv = null, operating, operatingMessage } = state;
+  const {
+    local: {
+      envList = [], currentEnv = null, operating, operatingMessage
+    }
+  } = state
+  console.log('plugin state', state)
   return ({ 
     envList,
     currentEnv,

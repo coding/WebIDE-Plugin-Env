@@ -1,19 +1,25 @@
 import component, { store } from './app';
-import * as actions from './actions';
-import { bindActionCreators } from 'redux';
+import APP from '../utils';
+
+export const global = new APP({
+  subscribeDataArray: ['GitState'],
+  pkgId: 'coding_web_ide_plugin',
+});
 
 
-export const data = {
-  getState: store.getState,
-  actions: bindActionCreators(actions, store.dispatch),
-};
-
-const CodingSDK = window.CodingSDK;
-
-
-export default class extends CodingSDK {
+export default class {
   pluginWillMount() {
-    console.log('this plugin will Moung');
+    console.log('this plugin will Mount');
+  }
+  pluginOnActive() {
+
+  }
+  /**
+   * this will call only when plugin is unmount
+   * @param  {}
+   */
+  pluginOnUnmount() {
+    console.log('this plugin will UnMount');
   }
   get component() {
     return component;
