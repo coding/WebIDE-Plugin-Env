@@ -3,16 +3,28 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
+const webpackConfig = require('./webpack.dev.config');
+const compiler = require('webpack')(webpackConfig);
+
+
+io.on('connection', (socket) => {
+  console.log('connect ' + socket.id);
+  socket.on('change', () => {
+    socket.broadcast.emit('onchange');
+  });
+});
 
 const PORT = process.env.PORT || 4000;
-const webpackConfig = require('./webpack.dev.config');
 
 const corsOptions = {
   origin: 'http://localhost:8060',
   optionsSuccessStatus: 200,
   credentials: true,
 };
-const codingPackage = require('./package.json').codingPackage
+const codingPackage = require('./package.json').codingPackage;
+
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
@@ -30,6 +42,7 @@ app.get('/', (req, res) => {
   res.send('it works');
 });
 
+
 app.get('/packages', (req, res) => {
   res.json({ [codingPackage.name]: codingPackage });
 });
@@ -38,10 +51,9 @@ app.get('/packages/:pkgId', (req, res) => {
   res.json(codingPackage);
 });
 
-app.use(require('webpack-dev-middleware')(require('webpack')(webpackConfig), {
+const webpackDevInstance = require('webpack-dev-middleware')(compiler, {
   publicPath: '/static',
   headers: { "Access-Control-Allow-Origin": "http://localhost:8060" },
-  hot: true,
   historyApiFallback: true,
   quiet: false,
   noInfo: false,
@@ -56,11 +68,21 @@ app.use(require('webpack-dev-middleware')(require('webpack')(webpackConfig), {
     chunks: true,
     chunkModules: false,
   },
-}));
-app.use(require('webpack-hot-middleware')(require('webpack')(webpackConfig)));
+});
 
-app.listen(PORT, () => {
+app.use(webpackDevInstance);
+compiler.watch({}, (err) => {
+  if (!err) {
+    console.log('send reload command to frontend');
+    io.emit('change');
+  }
+});
+
+// app.use(require('webpack-hot-middleware')(requi(re('webpack')(webpackConfig)));
+
+server.listen(PORT, () => {
   console.log(`plugin script folder served at localhost:${PORT}/static/`);
   console.log(`plugin list api served at localhost:${PORT}/packages`);
 });
 
+module.exports = { emitChange: io.emit };
