@@ -78,8 +78,6 @@ compiler.watch({}, (err) => {
   }
 });
 
-// app.use(require('webpack-hot-middleware')(requi(re('webpack')(webpackConfig)));
-
 server.listen(PORT, () => {
   console.log(`plugin script folder served at localhost:${PORT}/static/`);
   console.log(`plugin list api served at localhost:${PORT}/packages`);
