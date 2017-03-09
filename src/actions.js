@@ -1,8 +1,9 @@
 /* @flow weak */
 import { createAction } from 'redux-actions';
 import * as api from './api';
+import { global } from './manager';
 
-const { notify, NOTIFY_TYPE } = window;
+const { notify, NOTIFY_TYPE } = global.sdk.Notify;
 
 export const ENV_OPERATING = 'ENV_OPERATING';
 export const envOperating = createAction(ENV_OPERATING);
