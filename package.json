@@ -76,7 +76,8 @@
     "redux-thunk": "^2.1.0",
     "rimraf": "^2.6.1",
     "socket.io": "^1.7.3",
-    "style-loader": "^0.13.2"
+    "style-loader": "^0.13.2",
+    "codingSDK": "ssh://git@github.com/blizzardzheng/WebIDE-Plugin-SDK.git"    
   },
   "engines": {
     "npm": "^3.0.0"
