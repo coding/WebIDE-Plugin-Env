@@ -1,5 +1,5 @@
 import component, { store } from './app';
-import APP from '../utils';
+import APP from 'codingSDK/utils';
 
 export const global = new APP({
   subscribeDataArray: ['GitState'],

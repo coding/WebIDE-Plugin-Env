@@ -9,10 +9,7 @@
   "author": "candy <candy.zhengxq@gmail.com>",
   "main": "server.js",
   "scripts": {
-    "clean": "rimraf dist",
-    "dev": "NODE_ENV=development nodemon --watch package.json --watch server.js --exec babel-node server.js",
-    "build": "npm run clean && NODE_ENV=production webpack --config webpack.production.config.js --progress --profile --colors && npm run generateManifest",
-    "generateManifest": "babel-node .script/buildManifest.js"
+    "dev": "NODE_ENV=development babel-node node_modules/codingSDK/server.js"
   },
   "codingIdePackage": {
     "name": "coding_web_ide_plugin",
@@ -37,6 +34,7 @@
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
     "chai": "^3.5.0",
+    "codingSDK": "ssh://git@github.com/blizzardzheng/WebIDE-Plugin-SDK.git",
     "css-loader": "^0.26.1",
     "enzyme": "^2.2.0",
     "eslint": "^3.6.0",
