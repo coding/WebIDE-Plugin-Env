@@ -22,7 +22,7 @@ export default handleActions({
   },
   [ENV_OPERATING]: (state, action) => {
     return {
-      ...state.ExtensionState,
+      ...state,
       operating: action.payload.operating,
       operatingMessage: action.payload.msg || '',
     };

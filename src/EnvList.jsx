@@ -2,9 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as EnvActions from './actions';
-import cx from 'classnames'
+import cx from 'classnames';
+import { global } from './manager';
 
-const Modal = window.Modal
+const Modal = global.sdk.Modal;
 
 class EnvList extends Component {
   constructor(props) {
