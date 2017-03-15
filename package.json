@@ -12,7 +12,7 @@
     "dev": "NODE_ENV=development babel-node node_modules/codingSDK/server.js"
   },
   "codingIdePackage": {
-    "name": "coding_web_ide_plugin",
+    "name": "env",
     "displayName": "Environment",
     "description": "WebIDE-Plugin-Env for Coding WebIDE",
     "type": "extension",
