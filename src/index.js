@@ -1,4 +1,12 @@
 require('./base-theme/index.styl');
-export { default as app } from './app';
-export { default as reducer } from './reducer';
-export { default as Manager } from './manager';
+const app = require('./app').default;
+const reducer = require('./reducer').default;
+const Manager = require('./manager').default;
+
+module.exports = {
+  app,
+  reducer,
+  Manager,
+}
+
+window.codingPackageJsonp(module.exports)
