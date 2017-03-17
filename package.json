@@ -77,7 +77,7 @@
     "rimraf": "^2.6.1",
     "socket.io": "^1.7.3",
     "style-loader": "^0.13.2",
-    "codingSDK": "ssh://git@github.com/blizzardzheng/WebIDE-Plugin-SDK.git",
+    "codingSDK": "https://github.com/Coding/WebIDE-Plugin-SDK.git",
     "webpack": "^2.2.1",     
     "webpack-cleanup-plugin": "^0.4.1",
     "stylus": "^0.54.5",

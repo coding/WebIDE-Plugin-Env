@@ -1332,35 +1332,12 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/code-point-at/download/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-"codingIdePlugin@ssh://git@github.com/blizzardzheng/WebIDE-Plugin-Env.git":
+"codingSDK@https://github.com/Coding/WebIDE-Plugin-SDK.git":
   version "0.0.1-alpha.3"
-  resolved "ssh://git@github.com/blizzardzheng/WebIDE-Plugin-Env.git#a5d4603d55ab3babd99b9a238d4d12db9db65655"
+  resolved "https://github.com/Coding/WebIDE-Plugin-SDK.git#d2b42412c5de8225fe8455e1ce62481e7eb5e7df"
   dependencies:
     babel-preset-env "^1.1.8"
     babel-runtime "^6.11.6"
-    body-parser "^1.15.2"
-    classnames "^2.2.5"
-    codingSDK "ssh://git@github.com/blizzardzheng/WebIDE-Plugin-SDK.git"
-    cors "^2.8.1"
-    express "^4.14.0"
-    fs-promise "^1.0.0"
-    nodemon "^1.11.0"
-    react-redux "^4.4.6"
-    redux "^3.6.0"
-    redux-actions "^1.1.0"
-    redux-thunk "^2.1.0"
-    rimraf "^2.6.1"
-    socket.io "^1.7.3"
-    style-loader "^0.13.2"
-
-"codingSDK@ssh://git@github.com/blizzardzheng/WebIDE-Plugin-SDK.git":
-  version "0.0.1-alpha.3"
-  resolved "ssh://git@github.com/blizzardzheng/WebIDE-Plugin-SDK.git#893de66786122e78f98ff50b0bc2dc6bc72d9834"
-  dependencies:
-    babel-preset-env "^1.1.8"
-    babel-runtime "^6.11.6"
-    codingIdePlugin "ssh://git@github.com/blizzardzheng/WebIDE-Plugin-Env.git"
-    codingSDK "ssh://git@github.com/blizzardzheng/WebIDE-Plugin-SDK.git"
     cors "^2.8.1"
     fs-promise "^1.0.0"
     nodemon "^1.11.0"
