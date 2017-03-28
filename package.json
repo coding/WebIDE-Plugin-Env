@@ -9,7 +9,7 @@
   "author": "candy <candy.zhengxq@gmail.com>",
   "main": "server.js",
   "scripts": {
-    "dev": "NODE_ENV=development babel-node node_modules/codingSDK/server.js"
+    "dev": "PLUGIN=$(pwd) NODE_ENV=development babel-node node_modules/codingSDK/server.js"
   },
   "codingIdePackage": {
     "name": "env",
