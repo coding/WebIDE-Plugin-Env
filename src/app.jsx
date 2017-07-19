@@ -12,8 +12,10 @@ EnvList.propTypes = {
 };
 export const store = global.getStoreByReducer(reducer)
 
-export default props => (
+const app = props => (
   <Provider store={store}>
     <EnvList {...props} />
   </Provider>
 );
+
+export default React.createElement(app)

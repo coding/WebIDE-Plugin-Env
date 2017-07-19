@@ -1,6 +1,6 @@
 {
   "name": "WebIDE-Plugin-Env",
-  "version": "0.0.1-alpha.04",
+  "version": "0.0.1-alpha.05",
   "description": "WebIDE-Plugin-Env for Coding WebIDE",
   "repository": {
     "url": "https://github.com/blizzardzheng/WebIDE-Plugin-Env.git"
@@ -15,14 +15,7 @@
     "name": "env",
     "displayName": "Environment",
     "description": "WebIDE-Plugin-Env for Coding WebIDE",
-    "type": "extension",
-    "ui": {
-      "position": "right",
-      "label": {
-        "text": "Environment",
-        "icon": "fa fa-desktop"
-      }
-    }
+    "type": "extension"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
@@ -34,7 +27,6 @@
     "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
     "chai": "^3.5.0",
-    "codingSDK": "https://github.com/Coding/WebIDE-Plugin-SDK.git",
     "css-loader": "^0.26.1",
     "enzyme": "^2.2.0",
     "eslint": "^3.6.0",
@@ -42,6 +34,7 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
+    "express": "^4.14.0",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "git-url-parse": "^6.0.1",
     "jsdom": "^9.5.0",
@@ -56,8 +49,7 @@
     "webpack-cleanup-plugin": "^0.4.1",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-dev-server": "^2.4.1",
-    "webpack-hot-middleware": "^2.17.0",
-    "express": "^4.14.0"    
+    "webpack-hot-middleware": "^2.17.0"
   },
   "peerDependencies": {
     "react": "^0.14.7 || ^15.0.0"
@@ -65,28 +57,28 @@
   "dependencies": {
     "babel-preset-env": "^1.1.8",
     "babel-runtime": "^6.11.6",
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.17.2",
     "classnames": "^2.2.5",
+    "codingSDK": "https://github.com/Coding/WebIDE-Plugin-SDK.git#0.0.1-alpha.06",
     "cors": "^2.8.1",
+    "css-loader": "^0.26.1",
     "fs-promise": "^1.0.0",
     "nodemon": "^1.11.0",
+    "react": "^15.3.2",
+    "react-addons-test-utils": "^15.3.2",
+    "react-dom": "^15.3.2",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
     "redux-actions": "^1.1.0",
     "redux-thunk": "^2.1.0",
     "rimraf": "^2.6.1",
+    "sinon": "^1.17.6",
     "socket.io": "^1.7.3",
     "style-loader": "^0.13.2",
-    "codingSDK": "https://github.com/Coding/WebIDE-Plugin-SDK.git",
-    "webpack": "^2.2.1",     
-    "webpack-cleanup-plugin": "^0.4.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.5.0",
-    "sinon": "^1.17.6",
-    "react-dom": "^15.3.2",
-    "react": "^15.3.2",
-    "react-addons-test-utils": "^15.3.2",
-    "css-loader": "^0.26.1"    
+    "webpack": "^2.2.1",
+    "webpack-cleanup-plugin": "^0.4.1"
   },
   "engines": {
     "npm": "^3.0.0"

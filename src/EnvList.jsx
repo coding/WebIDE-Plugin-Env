@@ -23,7 +23,7 @@ class EnvList extends Component {
       <div className="env-list" >
       <div className="env-list-container" >
         <div className="env-list-panel">
-          <div className="panel-heading">Environments List</div>
+          <div className="panel-heading">Environments</div>
           <div className="panel-body">
             <div className="list-group">
               {envList.length > 0 ? (
