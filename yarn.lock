@@ -1332,9 +1332,9 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/code-point-at/download/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-"codingSDK@https://github.com/Coding/WebIDE-Plugin-SDK.git#0.0.1-alpha.06":
-  version "0.0.1-alpha.6"
-  resolved "https://github.com/Coding/WebIDE-Plugin-SDK.git#ae14e5e46735d2fcb76c9a030d655514357a68c5"
+"codingSDK@https://github.com/Coding/WebIDE-Plugin-SDK.git#0.0.1-alpha10":
+  version "0.0.1-alpha.7"
+  resolved "https://github.com/Coding/WebIDE-Plugin-SDK.git#417ddd104d8d9834f4fe1a284cdefcb8903aac46"
   dependencies:
     babel-preset-env "^1.1.8"
     babel-runtime "^6.11.6"
@@ -2879,6 +2879,10 @@ ignore-by-default@^1.0.0:
 ignore@^3.2.0:
   version "3.2.6"
   resolved "http://registry.npm.taobao.org/ignore/download/ignore-3.2.6.tgz#26e8da0644be0bb4cb39516f6c79f0e0f4ffe48c"
+
+immutable@^3.8.1:
+  version "3.8.1"
+  resolved "http://registry.npm.taobao.org/immutable/download/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
 imurmurhash@^0.1.4:
   version "0.1.4"

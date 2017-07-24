@@ -1,0 +1,24 @@
+{
+   "environments": "运行环境",
+   "global": "全局",
+   "shared": "共享",
+   "handleReset": {
+      "header": "你是否确认重置这个环境",
+      "message": "正在重置环境 {name}",
+      "okText": "重置"
+   },
+   "use": "使用",
+   "delete": "删除",
+   "handleDelete": {
+      "header": "你是否确定删除环境",
+      "message": "正在删除环境 {name}",
+      "okText": "删除"
+   },
+   "handleSwitch": {
+      "header": "你是否确定切换环境",
+      "message": "正在切换环境 {name}, 所有当前环境未保存的数据将丢失",
+      "okText": "切换"
+   },
+   "save": "重置",
+   "newEnvironmentName": "请输入新环境的名称"
+}

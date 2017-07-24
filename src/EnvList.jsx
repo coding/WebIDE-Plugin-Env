@@ -6,6 +6,8 @@ import cx from 'classnames';
 import { global } from './manager';
 
 const Modal = global.sdk.Modal;
+const i18n = global.i18n;
+
 
 class EnvList extends Component {
   constructor(props) {
@@ -23,7 +25,7 @@ class EnvList extends Component {
       <div className="env-list" >
       <div className="env-list-container" >
         <div className="env-list-panel">
-          <div className="panel-heading">Environments</div>
+          <div className="panel-heading">{i18n`list.environments`}</div>
           <div className="panel-body">
             <div className="list-group">
               {envList.length > 0 ? (
@@ -68,7 +70,7 @@ class EnvList extends Component {
     e.preventDefault()
     const defaultValue = 'new-environment'
     Modal.showModal('Prompt', {
-      message: 'Enter the name for the new environment.',
+      message: i18n`list.newEnvironmentName`,
       defaultValue: defaultValue,
       selectionRange: [0, defaultValue.length]
     }).then(this.createEnv)
@@ -76,9 +78,9 @@ class EnvList extends Component {
   handleReset = async (name, e) => {
     e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
-      header: 'Are you sure to reset this environment?',
-      message: `You're trying to reset environment ${name}`,
-      okText: 'Reset'
+      header: i18n`list.handleReset.header`,
+      message: i18n`list.handleReset.message${{name}}`,
+      okText: i18n`list.handleReset.okText`
     })
     Modal.dismissModal()
     if (confirmed) {
@@ -92,9 +94,9 @@ class EnvList extends Component {
   handleDelete = async (name, e) => {
     e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
-      header: 'Are you sure to delete this environment?',
-      message: `You're trying to delete environment ${name}`,
-      okText: 'Delete'
+      header: i18n`list.handleDelete.header`,      
+      message: i18n`list.handleDelete.message${{name}}`,      
+      okText: i18n`list.handleDelete.okText`
     })
     Modal.dismissModal()
     if (confirmed) {
@@ -104,9 +106,9 @@ class EnvList extends Component {
   handleSwitch = async (name, e) => {
     e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
-      header: 'Are you sure to switch environment?',
-      message: `You're trying to switch to environment ${name}, all unsaved changes to current environment will be lost.`,
-      okText: 'Switch'
+      header: i18n`list.handleSwitch.header`,      
+      message: i18n`list.handleSwitch.message`,      
+      okText: i18n`list.handleSwitch.okText`,      
     })
     Modal.dismissModal()
     if (confirmed) {
@@ -136,8 +138,8 @@ const EnvItem = ({node, isCurrent, handleSave, handleReset, handleDelete, handle
     <div className={cx('env-item', { current: isCurrent })}>
       <div className="env-item-heading">
         <i className="fa fa-desktop" />
-        {node.isGlobal ? <span className="env-label env-public">Global</span> : ''}
-        {isShared ? <span className="env-label env-shared">Shared</span> : ''}
+        {node.isGlobal ? <span className="env-label env-public">{i18n`list.global`}</span> : ''}
+        {isShared ? <span className="env-label env-shared">{i18n`list.shared`}</span> : ''}
         {node.name}
       </div>
       <div className="env-item-body">
@@ -154,25 +156,25 @@ const EnvItem = ({node, isCurrent, handleSave, handleReset, handleDelete, handle
         <div className="btn-group">
           <button className="btn btn-primary btn-sm" onClick={handleSave}>
             <i className="fa fa-floppy-o" />
-            Save as
+            {i18n`list.save`}
           </button>
           <button className="btn btn-primary btn-sm" onClick={handleReset.bind(null, node.name)}>
             <i className="fa fa-undo" />
-            Reset
+            {i18n`list.save`}            
           </button>
         </div>
       ) : (
         <div className="btn-group">
           <button className="btn btn-primary btn-sm" onClick={handleSwitch.bind(null, node.name)}>
             <i className="fa fa-play" />
-            Use
+            {i18n`list.use`}
           </button>
           <button className="btn btn-primary btn-sm" disabled={isShared || node.isGlobal} onClick={handleDelete.bind(null, node.name)}>
             <i className="fa fa-trash-o" />
-            Delete
+            {i18n`list.delete`}
           </button>
         </div>
-      )}
+      )}l
     </div>
   )
 }

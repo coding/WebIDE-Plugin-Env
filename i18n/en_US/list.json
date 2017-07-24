@@ -1,0 +1,24 @@
+{
+   "environments": "Environments",
+   "global": "Global",
+   "shared": "Shared",
+   "handleReset": {
+      "header": "Are you sure to reset this environment?",
+      "message": "You're trying to reset environment ${name}",
+      "okText": "Reset"
+   },
+   "use": "Use",
+   "delete": "Delete",
+   "handleDelete": {
+      "header": "Are you sure to delete this environment?",
+      "message": "You're trying to delete environment ${name}",
+      "okText": "Delete"
+   },
+   "handleSwitch": {
+      "header": "Are you sure to switch environment?",
+      "message": "You're trying to switch to environment ${name}, all unsaved changes to current environment will be lost.",
+      "okText": "Switch"
+   },
+   "save": "Reset",
+   "newEnvironmentName": "Enter the name for the new environment."
+}

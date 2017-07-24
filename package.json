@@ -3,13 +3,14 @@
   "version": "0.0.1-alpha.05",
   "description": "WebIDE-Plugin-Env for Coding WebIDE",
   "repository": {
-    "url": "https://github.com/blizzardzheng/WebIDE-Plugin-Env.git"
+    "url": "git@github.com:Coding/WebIDE-Plugin-Env.git"
   },
   "license": "ISC",
   "author": "candy <candy.zhengxq@gmail.com>",
   "main": "server.js",
   "scripts": {
-    "dev": "PLUGIN=$(pwd) NODE_ENV=development babel-node node_modules/codingSDK/server.js"
+    "dev": "PLUGIN=$(pwd) NODE_ENV=development babel-node node_modules/codingSDK/server.js",
+    "i18n": "I18nTargetRoot=$(pwd)/i18n/en_US babel-node node_modules/codingSDK/.script/generateI18n $(pwd)/src"
   },
   "codingIdePackage": {
     "name": "env",
@@ -37,6 +38,7 @@
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "git-url-parse": "^6.0.1",
+    "immutable": "^3.8.1",
     "jsdom": "^9.5.0",
     "mocha": "^3.0.2",
     "react": "^15.3.2",
@@ -59,7 +61,7 @@
     "babel-runtime": "^6.11.6",
     "body-parser": "^1.17.2",
     "classnames": "^2.2.5",
-    "codingSDK": "https://github.com/Coding/WebIDE-Plugin-SDK.git#0.0.1-alpha.06",
+    "codingSDK": "https://github.com/Coding/WebIDE-Plugin-SDK.git#0.0.1-alpha10",
     "cors": "^2.8.1",
     "css-loader": "^0.26.1",
     "fs-promise": "^1.0.0",
