@@ -61,7 +61,7 @@
     "babel-runtime": "^6.11.6",
     "body-parser": "^1.17.2",
     "classnames": "^2.2.5",
-    "codingSDK": "https://github.com/Coding/WebIDE-Plugin-SDK.git#0.0.1-alpha10",
+    "codingSDK": "https://github.com/Coding/WebIDE-Plugin-SDK.git#0.0.1-alpha.10",
     "cors": "^2.8.1",
     "css-loader": "^0.26.1",
     "fs-promise": "^1.0.0",
