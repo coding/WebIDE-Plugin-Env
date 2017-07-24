@@ -10,8 +10,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 0.0.1-alpha06
+ADDED:
+－ i18n 支持
 
-## 0.0.1-alpha.04
+
+## 0.0.1-alpha05
 ADDED:
 － injectComponent 支持
 
