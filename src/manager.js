@@ -1,8 +1,11 @@
 import APP from 'codingSDK/utils';
 
 import component, { store } from './app';
-import languagePool from '../i18n';
 
+const languagePool = require('../i18n/index.json').reduce((p, v) => {
+  p[v] = require(`../i18n/${v}/index`).default;
+  return p;
+}, {});
 
 export const global = new APP({
   subscribeDataArray: ['GitState'],
@@ -14,15 +17,16 @@ const { injectComponent, i18n } = global;
 
 export default class {
   pluginWillMount() {
+    console.log('plugin will mount');
     injectComponent.addComToSideBar('right', {
       text: i18n`list.environments`,
       icon: 'fa fa-desktop',
       key: 'env',
       onSidebarActive: () => {
-        console.log('componnet is active');
+        console.log('component is active');
       },
       onSidebarDeactive: () => {
-        console.log('componnet is deactive');
+        console.log('component is deactive');
       },
     }, extension => extension.app);
   }
@@ -35,7 +39,7 @@ export default class {
    * @param  {}
    */
   pluginOnUnmount() {
-    console.log('this plugin will UnMount');
+    console.log('plugin will unMount');
   }
   get component() {
     return component;
