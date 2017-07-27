@@ -174,7 +174,7 @@ const EnvItem = ({node, isCurrent, handleSave, handleReset, handleDelete, handle
             {i18n`list.delete`}
           </button>
         </div>
-      )}l
+      )}
     </div>
   )
 }
