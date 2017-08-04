@@ -1,4 +1,5 @@
 import APP from 'codingSDK/utils';
+import Manager from 'codingSDK/Manager';
 
 import component, { store } from './app';
 
@@ -14,25 +15,24 @@ export const global = new APP({
 });
 
 const { injectComponent, i18n } = global;
+const { inject, position } = injectComponent;
 
-export default class {
+export default class extends Manager{
   pluginWillMount() {
     console.log('plugin will mount');
-    injectComponent.addComToSideBar('right', {
+    inject(position.sideBar.right, {
       text: i18n`list.environments`,
       icon: 'fa fa-desktop',
       key: 'env',
-      onSidebarActive: () => {
-        console.log('component is active');
-      },
-      onSidebarDeactive: () => {
-        console.log('component is deactive');
+      actions: {
+        onSidebarActive: () => {
+          console.log('component is active');
+        },
+        onSidebarDeactive: () => {
+          console.log('component is deactive');
+        },
       },
     }, extension => extension.app);
-  }
-
-  doing() {
-    // will continue doing someting
   }
   /**
    * this will call only when plugin is unmount

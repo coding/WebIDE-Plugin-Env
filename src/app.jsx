@@ -10,7 +10,7 @@ EnvList.propTypes = {
   name: PropTypes.string,
   style: PropTypes.object,
 };
-export const store = global.getStoreByReducer(reducer)
+export const store = global.getStoreByReducer(reducer);
 
 const app = props => (
   <Provider store={store}>
