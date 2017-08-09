@@ -1,6 +1,6 @@
 {
   "name": "WebIDE-Plugin-Env",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "WebIDE-Plugin-Env for Coding WebIDE",
   "repository": {
     "url": "git@github.com:Coding/WebIDE-Plugin-Env.git"
