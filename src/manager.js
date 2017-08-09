@@ -20,7 +20,7 @@ const { inject, position } = injectComponent;
 export default class extends Manager{
   pluginWillMount() {
     console.log('plugin will mount');
-    inject(position.sideBar.right, {
+    inject(position.SIDEBAR.RIGHT, {
       text: i18n`list.environments`,
       icon: 'fa fa-desktop',
       key: 'env',
@@ -38,7 +38,7 @@ export default class extends Manager{
    * this will call only when plugin is unmount
    * @param  {}
    */
-  pluginOnUnmount() {
+  pluginWillUnmount() {
     console.log('plugin will unMount');
   }
   get component() {
