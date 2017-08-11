@@ -1,5 +1,5 @@
-import APP from 'codingSDK/utils';
-import Manager from 'codingSDK/Manager';
+import APP from 'webide-plugin-sdk/utils';
+import Manager from 'webide-plugin-sdk/Manager';
 
 import component, { store } from './app';
 
