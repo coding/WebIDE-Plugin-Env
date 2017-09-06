@@ -25,7 +25,7 @@ class EnvList extends Component {
       <div className="env-list" >
       <div className="env-list-container" >
         <div className="env-list-panel">
-          <div className="panel-heading">{i18n`list.environments`}</div>
+          <div className="panel-heading"><i className="icon fa fa-desktop" />{i18n`list.environments`}</div>
           <div className="panel-body">
             <div className="list-group">
               {envList.length > 0 ? (
