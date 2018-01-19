@@ -21,5 +21,7 @@
       "okText": "切换"
    },
    "save": "保存",
-   "newEnvironmentName": "请输入新环境的名称"
+   "newEnvironmentName": "请输入新环境的名称",
+   "currentEnv": "当前环境",
+   "envList": "环境列表"
 }

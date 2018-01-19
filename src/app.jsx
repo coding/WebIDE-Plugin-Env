@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { default as EnvList } from './EnvList';
-import { global } from './manager';
+import global from './global';
 
 import reducer from './reducer';
 

@@ -21,5 +21,7 @@
       "okText": "Switch"
    },
    "save": "Save",
-   "newEnvironmentName": "Enter the name for the new environment."
+   "newEnvironmentName": "Enter the name for the new environment.",
+   "currentEnv": "Current Env",
+   "envList": "Env List"
 }

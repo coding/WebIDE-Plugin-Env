@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as EnvActions from './actions';
 import cx from 'classnames';
-import { global } from './manager';
+import global from './global';
 
 const Modal = global.sdk.Modal;
 const i18n = global.i18n;
@@ -107,7 +107,7 @@ class EnvList extends Component {
     e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
       header: i18n`list.handleSwitch.header`,      
-      message: i18n`list.handleSwitch.message`,      
+      message: i18n`list.handleSwitch.message${{name}}`,      
       okText: i18n`list.handleSwitch.okText`,      
     })
     Modal.dismissModal()

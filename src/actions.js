@@ -1,7 +1,7 @@
 /* @flow weak */
 import { createAction } from 'redux-actions';
 import * as api from './api';
-import { global } from './manager';
+import global from './global';
 
 const { notify, NOTIFY_TYPE } = global.sdk.Notify;
 

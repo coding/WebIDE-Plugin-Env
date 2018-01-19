@@ -1,4 +1,4 @@
-import { global } from './manager';
+import global from './global';
 
 const request = global.request;
 const config = global.sdk.config;
