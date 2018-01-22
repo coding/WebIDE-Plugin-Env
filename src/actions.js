@@ -2,6 +2,7 @@
 import { createAction } from 'redux-actions';
 import * as api from './api';
 import global from './global';
+import { maskActions } from 'app/utils'
 
 const { notify, NOTIFY_TYPE } = global.sdk.Notify;
 
@@ -29,22 +30,26 @@ export function envId() {
 
 export function envReset() {
   return (dispatch) => {
-    dispatch(envOperating({ operating: true, msg: 'Resetting Environment...' }));
+    // dispatch(envOperating({ operating: true, msg: 'Resetting Environment...' }));
+    maskActions.showMask({ message: 'Resetting Environment...' });
     api.envReset()
       .then((res) => {
-        dispatch(envOperating({ operating: false }));
+        // dispatch(envOperating({ operating: false }));
         notify({ message: 'Reset success!' });
+        maskActions.hideMask();
       })
       .catch((err) => {
-        dispatch(envOperating({ operating: false }));
+        // dispatch(envOperating({ operating: false }));
         notify({ message: `Reset failed: ${err.msg}` });
+        maskActions.hideMask();
       });
   };
 }
 
 export function envSave({ name }) {
   return (dispatch) => {
-    dispatch(envOperating({ operating: true, msg: 'Saving Environment...' }));
+    // dispatch(envOperating({ operating: true, msg: 'Saving Environment...' }));
+    maskActions.showMask({ message: 'Saving Environment...' });
     api.envSave({ name })
       .then((res) => {
         if (res.error) {
@@ -57,10 +62,12 @@ export function envSave({ name }) {
         }
         dispatch(envList());
         dispatch(envId());
-        dispatch(envOperating({ operating: false }));
+        // dispatch(envOperating({ operating: false }));
+        maskActions.hideMask();
       })
       .catch((res) => {
-        dispatch(envOperating({ operating: false }));
+        // dispatch(envOperating({ operating: false }));
+        maskActions.hideMask();
         notify({
           notifyType: NOTIFY_TYPE.ERROR,
           message: `Save failed: ${res.msg}`,
@@ -71,7 +78,8 @@ export function envSave({ name }) {
 
 export function envDelete({ name }) {
   return (dispatch) => {
-    dispatch(envOperating({ operating: true, msg: 'Deleting Environment...' }));
+    // dispatch(envOperating({ operating: true, msg: 'Deleting Environment...' }));
+    maskActions.showMask({ message: 'Deleting Environment...' });
     api.envDelete({ name })
       .then((res) => {
         if (res.error) {
@@ -84,10 +92,12 @@ export function envDelete({ name }) {
         }
         dispatch(envList());
         dispatch(envId());
-        dispatch(envOperating({ operating: false }));
+        // dispatch(envOperating({ operating: false }));
+        maskActions.hideMask();
       })
       .catch((res) => {
-        dispatch(envOperating({ operating: false }));
+        // dispatch(envOperating({ operating: false }));
+        maskActions.hideMask();
         notify({
           notifyType: NOTIFY_TYPE.ERROR,
           message: `Delete failed: ${res.msg}`,
@@ -98,7 +108,8 @@ export function envDelete({ name }) {
 
 export function envSwitch({ name }) {
   return (dispatch) => {
-    dispatch(envOperating({ operating: true, msg: 'Switching Environment...' }));
+    // dispatch(envOperating({ operating: true, msg: 'Switching Environment...' }));
+    maskActions.showMask({ message: 'Switching Environment...' });
     api.envSwitch({ name })
       .then((res) => {
         if (res.error) {
@@ -111,10 +122,12 @@ export function envSwitch({ name }) {
         }
         dispatch(envList());
         dispatch(envId());
-        dispatch(envOperating({ operating: false }));
+        // dispatch(envOperating({ operating: false }));
+        maskActions.hideMask();
       })
       .catch((res) => {
-        dispatch(envOperating({ operating: false }));
+        // dispatch(envOperating({ operating: false }));
+        maskActions.hideMask();
         notify({
           notifyType: NOTIFY_TYPE.ERROR,
           message: `Switch failed: ${res.msg}`,
