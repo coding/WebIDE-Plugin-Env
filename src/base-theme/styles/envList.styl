@@ -26,6 +26,17 @@
       }
     }
   }
+  .c-logo-icon {
+    width: 92px;
+    height: 25px;
+    display: inline-block;
+    background-image: url(https://imgcache.qq.com/open_proj/proj_qcloud_v2/gateway/portal/css/sprite/global-201803131822.svg);
+    overflow: hidden;
+    text-indent: -10000px;
+    background-position: 0.64% 34.42%;
+    background-size: 269.5652173913044% 960%;
+    background-repeat: no-repeat;
+  }
 }
 .env-list-container {
   position: absolute;
@@ -43,6 +54,11 @@
       .fa {
         margin-right: 4px;
       }
+      .c-logo-icon {
+        transform: scale(0.7);
+        float: right;
+        transform-origin: right;
+      }
     }
     .panel-body {
       position: absolute;
@@ -52,6 +68,39 @@
       right: 0;
       overflow: auto;
     }
+    .server-info {
+      color: #9c9c9c;
+      padding: 10px 10px 10px 8px;
+      border-left: 2px solid #f5f5f5;
+      border-bottom: 1px solid #9c9c9c;
+      .title {
+        font-weight: bold;
+        padding-bottom: 4px;
+        .fa {
+          margin-right: 6px;
+        }  
+      }
+      .info-item {
+        margin-top: 6px;
+        display: flex;
+        label {
+          margin-right: 6px;
+          margin-bottom: 0;
+          display: flex;
+        }
+        .progress {
+          border: 1px solid #FFF;
+          flex: 1;
+          width: 60px;
+          margin-left: 6px;
+          .curr {
+            background: green;
+            height: 100%;
+          }
+        }
+      }
+    }
+    
     .env-item {
       padding: 10px 10px 10px 8px;
       border-left: 2px solid $pane-item-background-color;

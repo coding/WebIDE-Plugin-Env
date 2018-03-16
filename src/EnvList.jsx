@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux';
 import * as EnvActions from './actions';
 import cx from 'classnames';
 import global from './global';
+import ServerInfo from './ServerInfo';
 
 const Modal = global.sdk.Modal;
 const i18n = global.i18n;
-
 
 class EnvList extends Component {
   constructor(props) {
@@ -25,8 +25,12 @@ class EnvList extends Component {
       <div className="env-list" >
       <div className="env-list-container" >
         <div className="env-list-panel">
-          <div className="panel-heading"><i className="icon fa fa-desktop" />{i18n`list.environments`}</div>
+          <div className="panel-heading">
+            <i className="icon fa fa-desktop" />{i18n`list.environments`}
+            <i className="c-logo-icon">腾讯云</i>
+          </div>
           <div className="panel-body">
+            <ServerInfo />
             <div className="list-group">
               {envList.length > 0 ? (
                 envList.map((env) => {
