@@ -17,19 +17,34 @@ const ServerInfo = () => {
   if (config.serverInfo) {
     return (
       <div className="server-info">
-        <div className="title">
-          <i className="fa fa-desktop"></i>
-          Server Info
+        <div className="logo">
+          <i className="c-logo-icon">腾讯云</i>
         </div>
-        <div className="info-item">
-          <label>IP: {config.serverInfo.ipWan}</label>
-          <label>Core: 1</label>
-          <label>Memory: 1G</label>
-        </div>
-        <div className="info-item">
-          <label>CPU <Progress num={50} /></label>
-          <label>MEM <Progress num={50} /></label>
-          <label>HDD <Progress num={50} /></label>
+        <div className="server-info-content">
+          {/* <div className="title">
+            <i className="fa fa-desktop"></i>
+            Server Info
+          </div> */}
+          <div className="info-item">
+            <div className="info-line">
+              <label>IP: {config.serverInfo.ipWan}</label>
+            </div>
+            <div className="info-line">
+              <label>内核: 1</label>
+              <label>内存: 1G</label>
+            </div>
+          </div>
+          <div className="info-item">
+            <div className="status">
+              <label>CPU</label> <Progress num={50} />
+            </div>
+            <div className="status">
+              <label>内存</label> <Progress num={50} />
+            </div>
+            <div className="status">
+              <label>硬盘</label> <Progress num={50} />
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -27,7 +27,6 @@ class EnvList extends Component {
         <div className="env-list-panel">
           <div className="panel-heading">
             <i className="icon fa fa-desktop" />{i18n`list.environments`}
-            <i className="c-logo-icon">腾讯云</i>
           </div>
           <div className="panel-body">
             <ServerInfo />
