@@ -8,10 +8,10 @@ const Progress = ({ num }) => (
       className="curr"
       style={{
         width: `${num}%`,
-      }
-    }></div>
+      }}
+    ></div>
   </div>
-)
+);
 
 const ServerInfo = () => {
   if (config.serverInfo) {
@@ -36,20 +36,21 @@ const ServerInfo = () => {
           </div>
           <div className="info-item">
             <div className="status">
-              <label>CPU</label> <Progress num={50} />
+              <label>CPU</label> <Progress num={10} />
             </div>
             <div className="status">
-              <label>内存</label> <Progress num={50} />
+              <label>内存</label> <Progress num={60} />
             </div>
             <div className="status">
-              <label>硬盘</label> <Progress num={50} />
+              <label>硬盘</label> <Progress num={30} />
             </div>
           </div>
+          <a href="https://console.cloud.tencent.com/lighthosting" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">查看我的专用主机</a>
         </div>
       </div>
     );
   }
-  return (<div></div>)
+  return (<div />);
 };
 
 export default ServerInfo;
