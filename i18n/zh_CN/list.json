@@ -1,27 +1,41 @@
 {
-   "environments": "运行环境",
-   "global": "全局",
-   "shared": "共享",
-   "handleReset": {
-      "header": "你是否确认重置这个环境",
-      "message": "正在重置环境 {name}",
-      "okText": "重置"
-   },
-   "use": "使用",
-   "delete": "删除",
-   "reset": "重置",
-   "handleDelete": {
-      "header": "你是否确定删除环境",
-      "message": "正在删除环境 {name}",
-      "okText": "删除"
-   },
-   "handleSwitch": {
-      "header": "你是否确定切换环境",
-      "message": "正在切换环境 {name}, 所有当前环境未保存的数据将丢失",
-      "okText": "切换"
-   },
-   "save": "保存",
-   "newEnvironmentName": "请输入新环境的名称",
-   "currentEnv": "当前环境",
-   "envList": "环境列表"
+    "environments": "运行环境",
+    "global": "全局",
+    "shared": "共享",
+    "handleReset": {
+        "header": "你是否确认重置这个环境",
+        "message": "正在重置环境 {name}",
+        "okText": "重置"
+    },
+    "use": "使用",
+    "delete": "删除",
+    "reset": "重置",
+    "handleDelete": {
+        "header": "你是否确定删除环境",
+        "message": "正在删除环境 {name}",
+        "okText": "删除"
+    },
+    "handleSwitch": {
+        "header": "你是否确定切换环境",
+        "message": "正在切换环境 {name}, 所有当前环境未保存的数据将丢失",
+        "okText": "切换"
+    },
+    "save": "保存",
+    "newEnvironmentName": "请输入新环境的名称",
+    "currentEnv": "当前环境",
+    "envList": "环境列表",
+    "message": {
+        "resetting": "正在重置运行环境...",
+        "resetSuccess": "重置成功!",
+        "resetFailed": "重置失败: ${msg}",
+        "saving": "正在保存运行环境...",
+        "saveFailed": "保存失败: ${msg}",
+        "saveSuccess": "保存成功!",
+        "deleting": "正在删除运行环境...",
+        "deleteSuccess": "删除成功!",
+        "deleteFailed": "删除失败: ${msg}",
+        "switching": "正在切换运行环境...",
+        "switchSuccess": "切换成功!",
+        "switchFailed": "切换失败: ${msg}"
+    }
 }

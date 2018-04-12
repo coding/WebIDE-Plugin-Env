@@ -2,6 +2,7 @@
 import { createAction } from 'redux-actions';
 import * as api from './api';
 import global from './global';
+const i18n = global.i18n;
 import { maskActions } from 'app/utils'
 
 const { notify, NOTIFY_TYPE } = global.sdk.Notify;
@@ -31,16 +32,16 @@ export function envId() {
 export function envReset() {
   return (dispatch) => {
     // dispatch(envOperating({ operating: true, msg: 'Resetting Environment...' }));
-    maskActions.showMask({ message: 'Resetting Environment...' });
+    maskActions.showMask({ message: i18n`list.message.resetting` });
     api.envReset()
       .then((res) => {
         // dispatch(envOperating({ operating: false }));
-        notify({ message: 'Reset success!' });
+        notify({ message: i18n`list.message.resetSuccess` });
         maskActions.hideMask();
       })
       .catch((err) => {
         // dispatch(envOperating({ operating: false }));
-        notify({ message: `Reset failed: ${err.msg}` });
+        notify({ message: i18n`list.message.resetFailed${{ msg: err.msg }}` });
         maskActions.hideMask();
       });
   };
@@ -49,16 +50,16 @@ export function envReset() {
 export function envSave({ name }) {
   return (dispatch) => {
     // dispatch(envOperating({ operating: true, msg: 'Saving Environment...' }));
-    maskActions.showMask({ message: 'Saving Environment...' });
+    maskActions.showMask({ message: i18n`list.message.saving` });
     api.envSave({ name })
       .then((res) => {
         if (res.error) {
           notify({
             notifyType: NOTIFY_TYPE.ERROR,
-            message: `Save failed: ${res.msg}`,
+            message: i18n`list.message.saveFailed${{ msg: res.msg }}`,
           });
         } else {
-          notify({ message: 'Save success!' });
+          notify({ message: i18n`list.message.saveSuccess` });
         }
         dispatch(envList());
         dispatch(envId());
@@ -70,7 +71,7 @@ export function envSave({ name }) {
         maskActions.hideMask();
         notify({
           notifyType: NOTIFY_TYPE.ERROR,
-          message: `Save failed: ${res.msg}`,
+          message: i18n`list.message.saveFailed${{ msg: res.msg }}`,
         });
       });
   };
@@ -79,16 +80,16 @@ export function envSave({ name }) {
 export function envDelete({ name }) {
   return (dispatch) => {
     // dispatch(envOperating({ operating: true, msg: 'Deleting Environment...' }));
-    maskActions.showMask({ message: 'Deleting Environment...' });
+    maskActions.showMask({ message: i18n`list.message.deleting` });
     api.envDelete({ name })
       .then((res) => {
         if (res.error) {
           notify({
             notifyType: NOTIFY_TYPE.ERROR,
-            message: `Delete failed: ${res.msg}`,
+            message: i18n`list.message.deleteFailed${{ msg: res.msg }}`,
           });
         } else {
-          notify({ message: 'Delete success!' });
+          notify({ message: i18n`list.message.deleteSuccess` });
         }
         dispatch(envList());
         dispatch(envId());
@@ -100,7 +101,7 @@ export function envDelete({ name }) {
         maskActions.hideMask();
         notify({
           notifyType: NOTIFY_TYPE.ERROR,
-          message: `Delete failed: ${res.msg}`,
+          message: i18n`list.message.deleteFailed${{ msg: res.msg }}`,
         });
       });
   };
@@ -109,16 +110,16 @@ export function envDelete({ name }) {
 export function envSwitch({ name }) {
   return (dispatch) => {
     // dispatch(envOperating({ operating: true, msg: 'Switching Environment...' }));
-    maskActions.showMask({ message: 'Switching Environment...' });
+    maskActions.showMask({ message: i18n`list.message.switching` });
     api.envSwitch({ name })
       .then((res) => {
         if (res.error) {
           notify({
             notifyType: NOTIFY_TYPE.ERROR,
-            message: `Switch failed: ${res.msg}`,
+            message: i18n`list.message.switchFailed${{ msg: res.msg }}`,
           });
         } else {
-          notify({ message: 'Switch success!' });
+          notify({ message: i18n`list.message.switchSuccess` });
         }
         dispatch(envList());
         dispatch(envId());
@@ -130,7 +131,7 @@ export function envSwitch({ name }) {
         maskActions.hideMask();
         notify({
           notifyType: NOTIFY_TYPE.ERROR,
-          message: `Switch failed: ${res.msg}`,
+          message: i18n`list.message.switchFailed${{ msg: res.msg }}`,
         });
       });
   };

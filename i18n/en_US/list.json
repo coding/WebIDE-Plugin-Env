@@ -23,5 +23,19 @@
    "save": "Save",
    "newEnvironmentName": "Enter the name for the new environment.",
    "currentEnv": "Current Env",
-   "envList": "Env List"
+   "envList": "Env List",
+   "message": {
+       "resetting": "Resetting Environment...",
+       "resetSuccess": "Reset success!",
+       "resetFailed": "Reset failed: ${msg}",
+       "saving": "Saving Environment...",
+       "saveFailed": "Save failed: ${msg}",
+       "saveSuccess": "Save success!",
+       "deleting": "Deleting Environment...",
+       "deleteSuccess": "Delete success!",
+       "deleteFailed": "Delete failed: ${msg}",
+       "switching": "Switching Environment...",
+       "switchSuccess": "Switch success!",
+       "switchFailed": "Switch failed: ${msg}"
+   }
 }
