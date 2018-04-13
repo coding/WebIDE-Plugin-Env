@@ -157,10 +157,10 @@ const EnvItem = ({node, isCurrent, handleSave, handleReset, handleDelete, handle
       </div>
       {isCurrent ? (
         <div className="btn-group">
-          <button className="btn btn-primary btn-sm" onClick={handleSave}>
+          {/* <button className="btn btn-primary btn-sm" onClick={handleSave}>
             <i className="fa fa-floppy-o" />
             {i18n`list.save`}
-          </button>
+          </button> */}
           <button className="btn btn-primary btn-sm" onClick={handleReset.bind(null, node.name)}>
             <i className="fa fa-undo" />
             {i18n`list.reset`}         
