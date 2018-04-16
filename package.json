@@ -44,6 +44,7 @@
     "immutable": "^3.8.1",
     "jsdom": "^9.5.0",
     "mocha": "^3.0.2",
+    "raw-loader": "^0.5.1",
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
