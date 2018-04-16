@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as EnvActions from './actions';
 import cx from 'classnames';
 import global from './global';
+import getSvg from '../static';
 
 const Modal = global.sdk.Modal;
 const i18n = global.i18n;
@@ -138,9 +139,8 @@ const EnvItem = ({node, isCurrent, handleSave, handleReset, handleDelete, handle
     <div className={cx('env-item', { current: isCurrent })}>
       <div className="env-item-heading">
         <i className="fa fa-desktop" />
-        {node.isGlobal ? <span className="env-label env-public">{i18n`list.global`}</span> : ''}
-        {isShared ? <span className="env-label env-shared">{i18n`list.shared`}</span> : ''}
-        {node.name}
+        {node.isGlobal ? getSvg(node.displayName) : getSvg('share')}
+        {node.displayName}
       </div>
       <div className="env-item-body">
         {node.owner ? (
