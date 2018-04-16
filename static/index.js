@@ -1,6 +1,6 @@
 import React from 'react';
 import ubuntu from '!raw-loader!./ubuntu.svg';
-import nodejs from '!raw-loader!./nodejs.svg';
+import node from '!raw-loader!./nodejs.svg';
 import java from '!raw-loader!./java.svg';
 import php from '!raw-loader!./php.svg';
 import net from '!raw-loader!./dotnet.svg';
@@ -11,7 +11,7 @@ import ruby from '!raw-loader!./ruby.svg';
 import hexo from '!raw-loader!./hexo.svg';
 import share from '!raw-loader!./share.svg';
 
-const svgs = { ubuntu, nodejs, java, php, net, elixir, machinelearning, jekyll, ruby, hexo, share };
+const svgs = { ubuntu, node, java, php, net, elixir, machinelearning, jekyll, ruby, hexo, share };
 
 const match = (label) => {
 	for (let key in svgs) {
