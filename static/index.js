@@ -24,6 +24,6 @@ const match = (label) => {
 	return ubuntu;
 }
 
-export default (label) => {
+export default (label = '') => {
 	return <i className="env-icon" dangerouslySetInnerHTML={{ __html: match(label.toLowerCase()) }}></i>;
 }
