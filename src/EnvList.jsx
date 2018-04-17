@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 //import { observable } from 'mobx';
-import { autorun } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import * as EnvActions from './actions';
 import cx from 'classnames';
@@ -17,8 +16,7 @@ class EnvList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: true,
-      chinese: true
+      isLoading: true
     }
   }
   componentWillMount () {
