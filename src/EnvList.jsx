@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+//import { observable } from 'mobx';
+import { autorun } from 'mobx';
+import { observer, inject } from 'mobx-react';
 import * as EnvActions from './actions';
 import cx from 'classnames';
 import global from './global';
@@ -14,17 +17,18 @@ class EnvList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: true
+      isLoading: true,
+      chinese: true
     }
   }
   componentWillMount () {
-    this.fetch()
+    this.fetch();
   }
   render() {
     const { envList, currentEnv, operating, operatingMessage } = this.props
     return (
       <div className="env-list" >
-      <div className="env-list-container" >
+      <div className="env-list-container">
         <div className="env-list-panel">
           <div className="panel-heading">
             <i className="icon fa fa-desktop" />{i18n`list.environments`}
@@ -121,65 +125,68 @@ class EnvList extends Component {
   }
 }
 
-const EnvItem = ({node, isCurrent, handleSave, handleReset, handleDelete, handleSwitch}) => {
-  let createdDate
-  const isShared = (node.owner && (node.owner.globalKey !== config.owner.globalKey))
+const EnvItem = inject(
+    'SettingState'
+)(observer(({node, isCurrent, handleSave, handleReset, handleDelete, handleSwitch, SettingState}) => {
+    let createdDate
+    const isShared = (node.owner && (node.owner.globalKey !== config.owner.globalKey))
 
-  if (node.createdDate) {
-    createdDate = new Date(node.createdDate)
-    const year = createdDate.getFullYear()
-    let month = createdDate.getMonth() + 1
-    let date = createdDate.getDate()
-    if (month < 10) {
-      month = `0${month}`
+    if (node.createdDate) {
+        createdDate = new Date(node.createdDate)
+        const year = createdDate.getFullYear()
+        let month = createdDate.getMonth() + 1
+        let date = createdDate.getDate()
+        if (month < 10) {
+            month = `0${month}`
+        }
+        if (date < 10) {
+            date = `0${date}`
+        }
+        createdDate = `${year}-${month}-${date}`
     }
-    if (date < 10) {
-      date = `0${date}`
-    }
-    createdDate = `${year}-${month}-${date}`
-  }
-  return (
-    <div className={cx('env-item', { current: isCurrent })}>
-      <div className="env-item-heading">
-        {node.isGlobal ? getSvg(node.displayName) : getSvg('share')}
-        {node.displayName}
-      </div>
-      <div className="env-item-body">
-        {node.owner ? (
-          <div>
-            <i className="fa fa-user"> {node.owner.name}</i>
-            <i className="fa fa-clock-o"> {createdDate}</i>
-          </div>
-        ) : (
-          <div>{ node.description }</div>
-        )}
-      </div>
-      {isCurrent ? (
-        <div className="btn-group">
-          {/* <button className="btn btn-primary btn-sm" onClick={handleSave}>
-            <i className="fa fa-floppy-o" />
-            {i18n`list.save`}
-          </button> */}
-          <button className="btn btn-primary btn-sm" onClick={handleReset.bind(null, node.name)}>
-            <i className="fa fa-undo" />
-            {i18n`list.reset`}
-          </button>
+
+    return (
+        <div className={cx('env-item', { current: isCurrent })}>
+            <div className="env-item-heading">
+                {node.isGlobal ? getSvg(node.displayName) : getSvg('share')}
+                {node.displayName}
+            </div>
+            <div className="env-item-body">
+                {node.owner ? (
+                    <div>
+                        <i className="fa fa-user"> {node.owner.name}</i>
+                        <i className="fa fa-clock-o"> {createdDate}</i>
+                    </div>
+                ) : (
+                    <div>{ node.description }</div>
+                )}
+            </div>
+            {isCurrent ? (
+                <div className="btn-group">
+                    {/* <button className="btn btn-primary btn-sm" onClick={handleSave}>
+                        <i className="fa fa-floppy-o" />
+                        {i18n`list.save`}
+                    </button> */}
+                    <button className="btn btn-primary btn-sm" onClick={handleReset.bind(null, node.name)}>
+                        <i className="fa fa-undo" />
+                        {i18n`list.reset`}
+                    </button>
+                </div>
+            ) : (
+                <div className="btn-group">
+                    <button className="btn btn-primary btn-sm" onClick={handleSwitch.bind(null, node.name)}>
+                        <i className="fa fa-play" />
+                        {i18n`list.use`}
+                    </button>
+                    <button className="btn btn-primary btn-sm" disabled={isShared || node.isGlobal} onClick={handleDelete.bind(null, node.name)}>
+                        <i className="fa fa-trash-o" />
+                        {i18n`list.delete`}
+                    </button>
+                </div>
+            )}
         </div>
-      ) : (
-        <div className="btn-group">
-          <button className="btn btn-primary btn-sm" onClick={handleSwitch.bind(null, node.name)}>
-            <i className="fa fa-play" />
-            {i18n`list.use`}
-          </button>
-          <button className="btn btn-primary btn-sm" disabled={isShared || node.isGlobal} onClick={handleDelete.bind(null, node.name)}>
-            <i className="fa fa-trash-o" />
-            {i18n`list.delete`}
-          </button>
-        </div>
-      )}
-    </div>
-  )
-}
+    )
+}));
 
 EnvList.propTypes = {
   name: PropTypes.string,
