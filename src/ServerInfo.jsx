@@ -25,13 +25,18 @@ const ServerInfo = () => {
             <i className="fa fa-desktop"></i>
             Server Info
           </div> */}
-          <div className="info-item">
-            <div className="info-line">
-              <label>IP: {config.serverInfo.ipWan}</label>
+          <div className="info-item info-up">
+            <div className="info-detail">
+                <div className="info-line">
+                    <label>IP: {config.serverInfo.ipWan}</label>
+                </div>
+                <div className="info-line">
+                    <label>内核: 1</label>
+                    <label>内存: 1G</label>
+                </div>
             </div>
-            <div className="info-line">
-              <label>内核: 1</label>
-              <label>内存: 1G</label>
+            <div className="info-link">
+                <a href="https://console.cloud.tencent.com/lighthosting" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">查看专用主机</a>
             </div>
           </div>
           <div className="info-item">
@@ -45,7 +50,6 @@ const ServerInfo = () => {
               <label>硬盘</label> <Progress num={30} />
             </div>
           </div>
-          <a href="https://console.cloud.tencent.com/lighthosting" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">查看我的专用主机</a>
         </div>
       </div>
     );
