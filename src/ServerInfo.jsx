@@ -27,9 +27,9 @@ const ServerInfo = () => {
           </div> */}
           <div className="info-item info-up">
             <div className="info-detail">
-                <div className="info-line">
+                {/* <div className="info-line">
                     <label>IP: {config.serverInfo.ipWan}</label>
-                </div>
+                </div> */}
                 <div className="info-line">
                     <label>内核: 1</label>
                     <label>内存: 1G</label>
