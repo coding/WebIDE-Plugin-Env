@@ -1,15 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'lib/react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { observer } from 'mobx-react';
+import { observer } from 'lib/mobxReact';
 import * as EnvActions from './actions';
 import cx from 'classnames';
 import global from './global';
 import ServerInfo from './ServerInfo';
 import getSvg from '../static';
+import settings from 'app/settings'
 
 const Modal = global.sdk.Modal;
 const i18n = global.i18n;
+
+const language = settings.general.language
+
 
 class EnvList extends Component {
   constructor(props) {
@@ -18,11 +22,12 @@ class EnvList extends Component {
       isLoading: true
     }
   }
-  componentWillMount () {
+  componentWillMount() {
     this.fetch();
   }
   render() {
     const { envList, currentEnv, operating, operatingMessage } = this.props
+
     return (
       <div className="env-list" >
       <div className="env-list-container">
@@ -55,16 +60,16 @@ class EnvList extends Component {
             </div>
           </div>
         </div>
-      </div>
-      {operating ? (
-        <div className="mask">
-          <div className="progress">
-            <i className="fa fa-refresh fa-spin" />
-            {operatingMessage}
+        {operating ? (
+          <div className="mask">
+            <div className="progress">
+              <i className="fa fa-refresh fa-spin" />
+              {operatingMessage}
+            </div>
           </div>
+        ) : ''}
         </div>
-      ) : ''}
-    </div>
+      </div>
     );
   }
   fetch = () => {
@@ -102,7 +107,7 @@ class EnvList extends Component {
     e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
       header: i18n`list.handleReset.header`,
-      message: i18n`list.handleReset.message${{name}}`,
+      message: i18n`list.handleReset.message${{ name }}`,
       okText: i18n`list.handleReset.okText`
     })
     Modal.dismissModal()
@@ -112,95 +117,101 @@ class EnvList extends Component {
   }
   createEnv = (name) => {
     Modal.dismissModal()
-    this.props.actions.envSave({name})
+    this.props.actions.envSave({ name })
   }
   handleDelete = async (name, e) => {
     e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
       header: i18n`list.handleDelete.header`,
-      message: i18n`list.handleDelete.message${{name}}`,
+      message: i18n`list.handleDelete.message${{ name }}`,
       okText: i18n`list.handleDelete.okText`
     })
     Modal.dismissModal()
     if (confirmed) {
-      this.props.actions.envDelete({name})
+      this.props.actions.envDelete({ name })
     }
   }
   handleSwitch = async (name, e) => {
     e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
       header: i18n`list.handleSwitch.header`,
-      message: i18n`list.handleSwitch.message${{name}}`,
+      message: i18n`list.handleSwitch.message${{ name }}`,
       okText: i18n`list.handleSwitch.okText`,
     })
     Modal.dismissModal()
     if (confirmed) {
-      this.props.actions.envSwitch({name})
+      this.props.actions.envSwitch({ name })
     }
   }
 }
 
+@observer
 class EnvItem extends Component {
-    render() {
-        const {node, isCurrent, handleSave, handleReset, handleDelete, handleSwitch} = this.props;
-        let createdDate
-        const isShared = (node.owner && (node.owner.globalKey !== config.owner.globalKey))
+  render() {
+    const languageValue = language.value
+    const { node, isCurrent, handleSave, handleReset, handleDelete, handleSwitch } = this.props;
+    let createdDate
+    const isShared = (node.owner && (node.owner.globalKey !== config.owner.globalKey))
+    if (node.name === 'default') {
+      node.description = ' Ubuntu 14.04.4'
+      node.descriptionCN = ' Ubuntu 14.04.4'
+    }
 
-        if (node.createdDate) {
-            createdDate = new Date(node.createdDate)
-            const year = createdDate.getFullYear()
-            let month = createdDate.getMonth() + 1
-            let date = createdDate.getDate()
-            if (month < 10) {
-                month = `0${month}`
-            }
-            if (date < 10) {
-                date = `0${date}`
-            }
-            createdDate = `${year}-${month}-${date}`
-        }
-        return (
-            <div className={cx('env-item', { current: isCurrent })}>
-                <div className="env-item-heading">
-                    {node.isGlobal ? getSvg(node.displayName) : getSvg('share')}
-                    {node.displayName}
-                </div>
-                <div className="env-item-body">
-                    {node.owner ? (
-                        <div>
-                            <i className="fa fa-user"> {node.owner.name}</i>
-                            <i className="fa fa-clock-o"> {createdDate}</i>
-                        </div>
-                    ) : (
-                        <div>{ node.description }</div>
-                    )}
-                </div>
-                {isCurrent ? (
-                    <div className="btn-group">
-                        {/* <button className="btn btn-primary btn-sm" onClick={handleSave}>
+    if (node.createdDate) {
+      createdDate = new Date(node.createdDate)
+      const year = createdDate.getFullYear()
+      let month = createdDate.getMonth() + 1
+      let date = createdDate.getDate()
+      if (month < 10) {
+        month = `0${month}`
+      }
+      if (date < 10) {
+        date = `0${date}`
+      }
+      createdDate = `${year}-${month}-${date}`
+    }
+    return (
+      <div className={cx('env-item', { current: isCurrent })}>
+        <div className="env-item-heading">
+          {node.isGlobal ? getSvg(node.displayName) : getSvg('share')}
+          {node.displayName}
+        </div>
+        <div className="env-item-body">
+          {node.owner ? (
+            <div>
+              <i className="fa fa-user"> {node.owner.name}</i>
+              <i className="fa fa-clock-o"> {createdDate}</i>
+            </div>
+          ) : (
+              <div>{languageValue === 'English' ? node.description : node.descriptionCN}</div>
+            )}
+        </div>
+        {isCurrent ? (
+          <div className="btn-group">
+            {/* <button className="btn btn-primary btn-sm" onClick={handleSave}>
                             <i className="fa fa-floppy-o" />
                             {i18n`list.save`}
                         </button> */}
-                        <button className="btn btn-primary btn-sm" onClick={handleReset.bind(null, node.name)}>
-                            <i className="fa fa-undo" />
-                            {i18n`list.reset`}
-                        </button>
-                    </div>
-                ) : (
-                    <div className="btn-group">
-                        <button className="btn btn-primary btn-sm" onClick={handleSwitch.bind(null, node.name)}>
-                            <i className="fa fa-play" />
-                            {i18n`list.use`}
-                        </button>
-                        <button className="btn btn-primary btn-sm" disabled={isShared || node.isGlobal} onClick={handleDelete.bind(null, node.name)}>
-                            <i className="fa fa-trash-o" />
-                            {i18n`list.delete`}
-                        </button>
-                    </div>
-                )}
+            <button className="btn btn-primary btn-sm" onClick={handleReset.bind(null, node.name)}>
+              <i className="fa fa-undo" />
+              {i18n`list.reset`}
+            </button>
+          </div>
+        ) : (
+            <div className="btn-group">
+              <button className="btn btn-primary btn-sm" onClick={handleSwitch.bind(null, node.name)}>
+                <i className="fa fa-play" />
+                {i18n`list.use`}
+              </button>
+              <button className="btn btn-primary btn-sm" disabled={isShared || node.isGlobal} onClick={handleDelete.bind(null, node.name)}>
+                <i className="fa fa-trash-o" />
+                {i18n`list.delete`}
+              </button>
             </div>
-        )
-    }
+          )}
+      </div>
+    )
+  }
 }
 
 EnvList.propTypes = {
