@@ -6,7 +6,7 @@ const config = global.sdk.config;
 
 
 export function envList() {
-  return request.get(`/tty/${config.spaceKey}/env_list`);
+  return request.get(`/tty/${config.spaceKey}/used_list`);
 }
 
 export function envId() {

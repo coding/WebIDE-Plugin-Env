@@ -85,7 +85,7 @@ class EnvList extends Component {
       position: 'center',
       message: '选择运行环境',
     }).then((data) => {
-      console.log(data)
+      this.props.actions.envSwitch({name: data})
     })
   }
 
