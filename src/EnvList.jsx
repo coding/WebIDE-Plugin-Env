@@ -32,6 +32,11 @@ class EnvList extends Component {
           </div>
           <div className="panel-body">
             <ServerInfo />
+            <p className="env-add-button" onClick={this.handleAddAEnv}>
+              <button className="btn btn-default">
+                + 添加环境
+              </button>
+            </p>
             <div className="list-group">
               {envList.length > 0 ? (
                 envList.map((env) => {
@@ -71,6 +76,19 @@ class EnvList extends Component {
       })
     })
   }
+
+
+  handleAddAEnv = (e) => {
+    e.preventDefault()
+    Modal.showModal({
+      type: 'EnvListSelector',
+      position: 'center',
+      message: '选择运行环境',
+    }).then((data) => {
+      console.log(data)
+    })
+  }
+
   handleSave = (e) => {
     e.preventDefault()
     const defaultValue = 'new-environment'
