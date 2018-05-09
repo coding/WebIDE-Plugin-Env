@@ -37,5 +37,6 @@
         "switching": "正在切换运行环境...",
         "switchSuccess": "切换成功!",
         "switchFailed": "切换失败: ${msg}"
-    }
+    },
+    "addEnvironment": "添加环境"
 }
