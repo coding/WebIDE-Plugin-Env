@@ -8,6 +8,7 @@ import global from './global';
 import ServerInfo from './ServerInfo';
 import getSvg from '../static';
 import settings from 'app/settings'
+import EnvListSelector from './EnvListSelector';
 
 const Modal = global.sdk.Modal;
 const i18n = global.i18n;
@@ -24,35 +25,40 @@ class EnvList extends Component {
   }
   componentWillMount() {
     this.fetch();
+    Modal.modalRegister('EnvListSelector', EnvListSelector);
   }
   render() {
     const { envList, currentEnv, operating, operatingMessage } = this.props
 
     return (
       <div className="env-list" >
-        <div className="env-list-container">
-          <div className="env-list-panel">
-            <div className="panel-heading">
-              <i className="icon fa fa-desktop" />{i18n`list.environments`}
-            </div>
-            <div className="panel-body">
-              <ServerInfo />
-              <div className="list-group">
-                {envList.length > 0 ? (
-                  envList.map((env) => {
-                    return (
-                      <EnvItem
-                        node={env}
-                        key={env.name}
-                        isCurrent={(currentEnv.name === env.name)}
-                        handleSave={this.handleSave}
-                        handleReset={this.handleReset}
-                        handleDelete={this.handleDelete}
-                        handleSwitch={this.handleSwitch} />
-                    )
-                  })
-                ) : ''}
-              </div>
+      <div className="env-list-container">
+        <div className="env-list-panel">
+          <div className="panel-heading">
+            <i className="icon fa fa-desktop" />{i18n`list.environments`}
+          </div>
+          <div className="panel-body">
+            <ServerInfo />
+            <p className="env-add-button">
+              <button className="btn btn-default" onClick={this.handleAddAEnv}>
+                + 添加环境
+              </button>
+            </p>
+            <div className="list-group">
+              {envList.length > 0 ? (
+                envList.map((env) => {
+                  return (
+                    <EnvItem
+                      node={env}
+                      key={env.name}
+                      isCurrent={(currentEnv.name === env.name)}
+                      handleSave={this.handleSave}
+                      handleReset={this.handleReset}
+                      handleDelete={this.handleDelete}
+                      handleSwitch={this.handleSwitch}/>
+                  )
+                })
+              ): ''}
             </div>
           </div>
         </div>
@@ -64,6 +70,7 @@ class EnvList extends Component {
             </div>
           </div>
         ) : ''}
+        </div>
       </div>
     );
   }
@@ -76,6 +83,19 @@ class EnvList extends Component {
       })
     })
   }
+
+
+  handleAddAEnv = (e) => {
+    e.preventDefault()
+    Modal.showModal({
+      type: 'EnvListSelector',
+      position: 'center',
+      message: '选择运行环境',
+    }).then((data) => {
+      this.props.actions.envSwitch({name: data})
+    })
+  }
+
   handleSave = (e) => {
     e.preventDefault()
     const defaultValue = 'new-environment'
@@ -185,7 +205,7 @@ class EnvItem extends Component {
                 <i className="fa fa-play" />
                 {i18n`list.use`}
               </button>
-              <button className="btn btn-primary btn-sm" disabled={isShared || node.isGlobal} onClick={handleDelete.bind(null, node.name)}>
+              <button className="btn btn-primary btn-sm" disabled={isShared} onClick={handleDelete.bind(null, node.name)}>
                 <i className="fa fa-trash-o" />
                 {i18n`list.delete`}
               </button>
