@@ -113,7 +113,7 @@ export function envSwitch({ name }) {
     maskActions.showMask({ message: i18n`list.message.switching` });
     api.envSwitch({ name })
       .then((res) => {
-        if (res.error) {
+        if (res.code && res.code !== 0) {
           notify({
             notifyType: NOTIFY_TYPE.ERROR,
             message: i18n`list.message.switchFailed${{ msg: res.msg }}`,

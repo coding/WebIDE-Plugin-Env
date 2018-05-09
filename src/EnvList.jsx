@@ -8,6 +8,7 @@ import global from './global';
 import ServerInfo from './ServerInfo';
 import getSvg from '../static';
 import settings from 'app/settings'
+import EnvListSelector from './EnvListSelector';
 
 const Modal = global.sdk.Modal;
 const i18n = global.i18n;
@@ -24,6 +25,7 @@ class EnvList extends Component {
   }
   componentWillMount() {
     this.fetch();
+    Modal.modalRegister('EnvListSelector', EnvListSelector);
   }
   render() {
     const { envList, currentEnv, operating, operatingMessage } = this.props

@@ -28,3 +28,8 @@ export function envSwitch({ name }) {
 export function envDelete({ name }) {
   return request.delete(`/tty/${config.spaceKey}/used`, { envId: name });
 }
+
+
+export function defaultEnvList() {
+  return request.get(`/tty/${config.spaceKey}/env_list`);
+}
