@@ -155,8 +155,8 @@ class EnvItem extends Component {
     let createdDate
     const isShared = (node.owner && (node.owner.globalKey !== config.owner.globalKey))
     if (node.name === 'default') {
-      node.description = ' Ubuntu 14.04.4'
-      node.descriptionCN = ' Ubuntu 14.04.4'
+      node.description = ' Ubuntu 14.04.4 with Python 2.7.12, Python 3.5.2'
+      node.descriptionCN = ' Ubuntu 14.04.4 已安装 Python 2.7.12，Python 3.5.2'
     }
 
     if (node.createdDate) {
