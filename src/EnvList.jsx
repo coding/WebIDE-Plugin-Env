@@ -41,7 +41,7 @@ class EnvList extends Component {
             <ServerInfo />
             <p className="env-add-button">
               <button className="btn btn-default" onClick={this.handleAddAEnv}>
-                + 添加环境
+                + {i18n`list.addEnvironment`}
               </button>
             </p>
             <div className="list-group">
@@ -205,7 +205,7 @@ class EnvItem extends Component {
                 <i className="fa fa-play" />
                 {i18n`list.use`}
               </button>
-              <button className="btn btn-primary btn-sm" disabled={isShared} onClick={handleDelete.bind(null, node.name)}>
+              <button className="btn btn-primary btn-sm" disabled={isShared || node.name === 'default'} onClick={handleDelete.bind(null, node.name)}>
                 <i className="fa fa-trash-o" />
                 {i18n`list.delete`}
               </button>

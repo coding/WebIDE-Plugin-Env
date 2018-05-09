@@ -37,5 +37,6 @@
        "switching": "Switching Environment...",
        "switchSuccess": "Switch success!",
        "switchFailed": "Switch failed: ${msg}"
-   }
+   },
+   "addEnvironment": "Add environment"
 }

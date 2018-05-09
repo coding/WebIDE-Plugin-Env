@@ -36,7 +36,7 @@ const ServerInfo = () => {
                 </div>
             </div>
             <div className="info-link">
-                <a href="https://console.cloud.tencent.com/lighthosting" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">查看专用主机</a>
+                <a href="https://console.cloud.tencent.com/lighthosting" target="_blank" rel="noopener noreferrer">查看专用主机</a>
             </div>
           </div>
           <div className="info-item">

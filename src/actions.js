@@ -21,11 +21,30 @@ export function envList() {
   });
 }
 
+export const DEFAULT_ENV = 'DEFAULT_ENV';
+export const updateDefaultEnvList = createAction(DEFAULT_ENV);
+export function getDefaultEnvList() {
+  return (dispatch) => {
+    api.defaultEnvList()
+      .then((res) => {
+        dispatch(updateDefaultEnvList({ defaultEnv: res }));
+      })
+      .catch((res) => {
+        notify({
+          notifyType: NOTIFY_TYPE.ERROR,
+          message: i18n`list.message.switchFailed${{ msg: res.msg }}`,
+        });
+      });
+  };
+}
+
 export const ENV_ID = 'ENV_ID';
 export const updateEnvId = createAction(ENV_ID);
 export function envId() {
   return dispatch => api.envId().then((res) => {
     dispatch(updateEnvId({ currentEnv: res }));
+    dispatch(getDefaultEnvList());
+    api.envSwitch({ name: res.name });
   });
 }
 
