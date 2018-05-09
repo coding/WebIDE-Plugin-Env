@@ -39,8 +39,8 @@ class EnvList extends Component {
           </div>
           <div className="panel-body">
             <ServerInfo />
-            <p className="env-add-button" onClick={this.handleAddAEnv}>
-              <button className="btn btn-default">
+            <p className="env-add-button">
+              <button className="btn btn-default" onClick={this.handleAddAEnv}>
                 + 添加环境
               </button>
             </p>
