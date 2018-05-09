@@ -203,7 +203,7 @@ class EnvItem extends Component {
                 <i className="fa fa-play" />
                 {i18n`list.use`}
               </button>
-              <button className="btn btn-primary btn-sm" disabled={isShared || node.isGlobal} onClick={handleDelete.bind(null, node.name)}>
+              <button className="btn btn-primary btn-sm" disabled={isShared} onClick={handleDelete.bind(null, node.name)}>
                 <i className="fa fa-trash-o" />
                 {i18n`list.delete`}
               </button>

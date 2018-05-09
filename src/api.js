@@ -26,5 +26,5 @@ export function envSwitch({ name }) {
 }
 
 export function envDelete({ name }) {
-  return request.delete(`/tty/${config.spaceKey}`, { envId: name });
+  return request.delete(`/tty/${config.spaceKey}/used`, { envId: name });
 }
