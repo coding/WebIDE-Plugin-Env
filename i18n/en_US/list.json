@@ -38,5 +38,7 @@
        "switchSuccess": "Switch success!",
        "switchFailed": "Switch failed: ${msg}"
    },
-   "addEnvironment": "Add environment"
+   "addEnvironment": "Add environment",
+   "selectEnvironment": "Select operating environment",
+   "presetEnvironment": "Preset environment"
 }

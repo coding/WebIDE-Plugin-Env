@@ -1,16 +1,17 @@
 import React, { Component, PropTypes } from 'lib/react'
 import settings from 'app/settings'
+import { observer } from 'lib/mobxReact';
 import { defaultEnvList } from './api'
 
 import getSvg from '../static'
 import global from './global';
 
+const i18n = global.i18n;
 const Modal = global.sdk.Modal;
 
-const language = settings.general.language.value
-
-const EnvItem = ({ node, handleClick }) => {
+const EnvItem = observer(({ node, handleClick }) => {
   let createdDate
+  const language = settings.general.language.value
   if (node.createdDate) {
     createdDate = new Date(node.createdDate)
     const year = createdDate.getFullYear()
@@ -48,7 +49,7 @@ const EnvItem = ({ node, handleClick }) => {
       </div>
     </div>
   )
-}
+})
 
 EnvItem.propTypes = {
   node: PropTypes.object,
@@ -86,15 +87,14 @@ class EnvListSelector extends Component {
   )
 
   render () {
-    const { message } = this.props
     const { defaultEnv } = this.state
     return (
       <div className='modal-content' style={{ width: 640 }}>
-        <div className='env-list-selector-header'>{message}</div>
+        <div className='env-list-selector-header'>{i18n`list.selectEnvironment`}</div>
         <div className='fixed-line' />
         <div className='env-list-content'>
           {/* <p className='env-list-little-header'>共享环境</p>*/}
-          <p className='env-list-little-header'>预置环境</p>
+          <p className='env-list-little-header'>{i18n`list.presetEnvironment`}</p>
           <div className='env-list-list-item'>{this.renderEnvItems(defaultEnv)}</div>
         </div>
       </div>
