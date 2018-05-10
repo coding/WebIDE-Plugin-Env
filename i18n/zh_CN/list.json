@@ -38,5 +38,7 @@
         "switchSuccess": "切换成功!",
         "switchFailed": "切换失败: ${msg}"
     },
-    "addEnvironment": "添加环境"
+    "addEnvironment": "添加环境",
+    "selectEnvironment": "选择运行环境",
+    "presetEnvironment": "预设环境"
 }
