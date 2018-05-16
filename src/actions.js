@@ -44,7 +44,6 @@ export function envId() {
   return dispatch => api.envId().then((res) => {
     dispatch(updateEnvId({ currentEnv: res }));
     dispatch(getDefaultEnvList());
-    api.envSwitch({ name: res.name });
   });
 }
 
