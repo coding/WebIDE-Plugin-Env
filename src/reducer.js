@@ -30,8 +30,6 @@ export default handleActions(
     },
     [DEFAULT_ENV]: (state, action) => {
       const currentEnv = action.payload.defaultEnv.find(env => env.name === state.currentEnv.name);
-      const { payload: { defaultEnv } } = action;
-      console.log(currentEnv);
       return {
         ...state,
         defaultEnv: action.payload.defaultEnv,
