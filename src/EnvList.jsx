@@ -80,13 +80,13 @@ class EnvList extends Component {
     const envIdPromise = actions.envId()
     const envListPromise = actions.envList()
     Promise.all([envIdPromise, envListPromise]).then((res) => {
-      const { currentEnv, envList } = this.props
+      const { currentEnv, envList } = this.props;
       if (!envList.find((env) => env.name === currentEnv.name)) {
         setCurrentEnv(currentEnv.name)
       }
       this.setState({
         isLoading: false,
-        oldEnvId: res[0].name,
+        oldEnvId: currentEnv.name,
       })
     })
   }

@@ -32,6 +32,5 @@ export function defaultEnvList() {
 }
 
 export function setCurrentEnv(id) {
-  debugger
   return request.post(`/tty/${config.spaceKey}/used`, { envId: id });
 }
