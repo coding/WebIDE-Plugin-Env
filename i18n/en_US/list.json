@@ -17,7 +17,7 @@
    },
    "handleSwitch": {
       "header": "Are you sure to switch environment?",
-      "message": "You're trying to switch to environment {name}, all unsaved changes to current environment will be lost.",
+      "message": "You're trying to switch to environment {newEnvId}, all unsaved changes to current environment will be lost.",
       "okText": "Switch"
    },
    "save": "Save",
