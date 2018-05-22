@@ -43,8 +43,7 @@ export const updateEnvId = createAction(ENV_ID);
 export function envId() {
   return dispatch => api.envId().then((res) => {
     dispatch(updateEnvId({ currentEnv: res }));
-    dispatch(getDefaultEnvList());
-    api.envSwitch({ name: res.name });
+    return res;
   });
 }
 
@@ -111,7 +110,6 @@ export function envDelete({ name }) {
           notify({ message: i18n`list.message.deleteSuccess` });
         }
         dispatch(envList());
-        dispatch(envId());
         // dispatch(envOperating({ operating: false }));
         maskActions.hideMask();
       })
@@ -126,11 +124,11 @@ export function envDelete({ name }) {
   };
 }
 
-export function envSwitch({ name }) {
+export function envSwitch({ oldEnvId, newEnvId }) {
   return (dispatch) => {
     // dispatch(envOperating({ operating: true, msg: 'Switching Environment...' }));
     maskActions.showMask({ message: i18n`list.message.switching` });
-    api.envSwitch({ name })
+    api.envSwitch({ oldEnvId, newEnvId })
       .then((res) => {
         if (res.code && res.code !== 0) {
           notify({
@@ -139,9 +137,9 @@ export function envSwitch({ name }) {
           });
         } else {
           notify({ message: i18n`list.message.switchSuccess` });
+          dispatch(envList());
+          dispatch(updateEnvId({ currentEnv: { name: newEnvId} }));
         }
-        dispatch(envList());
-        dispatch(envId());
         // dispatch(envOperating({ operating: false }));
         maskActions.hideMask();
       })
@@ -155,4 +153,3 @@ export function envSwitch({ name }) {
       });
   };
 }
-

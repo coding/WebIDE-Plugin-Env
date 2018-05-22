@@ -255,7 +255,7 @@
 }
 
 .modal-container {
-  
+
   .env-list-selector-header {
     padding: 5px;
     font-size: 20px;
@@ -267,7 +267,7 @@
     top: 45px;
     width: 100%;
     height 1px;
-    background-color: #393939;  
+    background-color: #393939;
   }
 
   .env-list-content {
@@ -284,6 +284,10 @@
       flex-wrap: wrap;
       justify-content: space-between;
     }
+    .env-item-modal.capable:hover {
+      border-color: #5e9ef3;
+      cursor: pointer;
+    }
     .env-item-modal {
       width: calc(50% - 5px);
       border: 1px solid #444;
@@ -291,13 +295,11 @@
       margin-bottom: 10px;
       height: 58px;
       padding: 10px 10px 10px 8px;
-      cursor: pointer;
+      cursor: not-allowed;
+      user-select: none;
       position: relative;
       &:last-child {
-        margin-bottom: 0px;  
-      }
-      &:hover {
-        border-color: #5e9ef3;
+        margin-bottom: 0px;
       }
       .env-item-heading {
         display: flex;
@@ -354,5 +356,5 @@
         display: block;
       }
     }
-  }  
+  }
 }
