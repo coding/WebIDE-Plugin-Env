@@ -30,3 +30,8 @@ export function envDelete({ name }) {
 export function defaultEnvList() {
   return request.get(`/tty/${config.spaceKey}/env_list`);
 }
+
+export function setCurrentEnv(id) {
+  debugger
+  return request.post(`/tty/${config.spaceKey}/used`, { envId: id });
+}

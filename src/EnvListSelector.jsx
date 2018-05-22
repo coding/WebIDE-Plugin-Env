@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'lib/react'
-import settings from 'app/settings'
+import React, { Component, PropTypes } from 'lib/react';
+import settings from 'app/settings';
 import { observer } from 'lib/mobxReact';
-import { defaultEnvList, envList } from './api'
+import { defaultEnvList, envList } from './api';
 
-import getSvg from '../static'
+import getSvg from '../static';
 import global from './global';
 
 const i18n = global.i18n;
@@ -31,18 +31,17 @@ const EnvItem = observer(({ node, userEnv, handleClick }) => {
       </div>
       <div className='env-item-body'>{language === 'English' ? node.description : node.descriptionCN}</div>
     </div>
-  )
-})
+  );
+});
 
 EnvItem.propTypes = {
   node: PropTypes.object,
   handleClick: PropTypes.func,
-}
+};
 
 class EnvListSelector extends Component {
-
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       defaultEnv: [],
       userEnv: [],
@@ -84,9 +83,8 @@ class EnvListSelector extends Component {
           <div className='env-list-list-item'>{this.renderEnvItems(defaultEnv, userEnv)}</div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-
-export default EnvListSelector
+export default EnvListSelector;

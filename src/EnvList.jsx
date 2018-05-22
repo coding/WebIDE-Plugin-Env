@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { observer } from 'lib/mobxReact';
 import * as EnvActions from './actions';
+import { setCurrentEnv } from './api';
 import cx from 'classnames';
 import global from './global';
 import ServerInfo from './ServerInfo';
@@ -75,9 +76,14 @@ class EnvList extends Component {
     );
   }
   fetch = () => {
-    const envIdPromise = this.props.actions.envId()
-    const envListPromise = this.props.actions.envList()
+    const { actions } = this.props
+    const envIdPromise = actions.envId()
+    const envListPromise = actions.envList()
     Promise.all([envIdPromise, envListPromise]).then((res) => {
+      const { currentEnv, envList } = this.props
+      if (!envList.find((env) => env.name === currentEnv.name)) {
+        setCurrentEnv(currentEnv.name)
+      }
       this.setState({
         isLoading: false,
         oldEnvId: res[0].name,

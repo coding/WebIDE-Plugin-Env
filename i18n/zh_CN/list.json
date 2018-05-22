@@ -27,16 +27,16 @@
     "message": {
         "resetting": "正在重置运行环境...",
         "resetSuccess": "重置成功!",
-        "resetFailed": "重置失败: ${msg}",
+        "resetFailed": "重置失败: {msg}",
         "saving": "正在保存运行环境...",
-        "saveFailed": "保存失败: ${msg}",
+        "saveFailed": "保存失败: {msg}",
         "saveSuccess": "保存成功!",
         "deleting": "正在删除运行环境...",
         "deleteSuccess": "删除成功!",
-        "deleteFailed": "删除失败: ${msg}",
+        "deleteFailed": "删除失败: {msg}",
         "switching": "正在切换运行环境...",
         "switchSuccess": "切换成功!",
-        "switchFailed": "切换失败: ${msg}"
+        "switchFailed": "切换失败: {msg}"
     },
     "addEnvironment": "添加环境",
     "selectEnvironment": "选择运行环境",

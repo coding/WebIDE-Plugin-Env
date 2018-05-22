@@ -4,7 +4,7 @@
    "shared": "Shared",
    "handleReset": {
       "header": "Are you sure to reset this environment?",
-      "message": "You're trying to reset environment ${name}",
+      "message": "You're trying to reset environment {name}",
       "okText": "Reset"
    },
    "use": "Use",
@@ -12,12 +12,12 @@
    "reset": "Reset",
    "handleDelete": {
       "header": "Are you sure to delete this environment?",
-      "message": "You're trying to delete environment ${name}",
+      "message": "You're trying to delete environment {name}",
       "okText": "Delete"
    },
    "handleSwitch": {
       "header": "Are you sure to switch environment?",
-      "message": "You're trying to switch to environment ${name}, all unsaved changes to current environment will be lost.",
+      "message": "You're trying to switch to environment {name}, all unsaved changes to current environment will be lost.",
       "okText": "Switch"
    },
    "save": "Save",
@@ -27,16 +27,16 @@
    "message": {
        "resetting": "Resetting Environment...",
        "resetSuccess": "Reset success!",
-       "resetFailed": "Reset failed: ${msg}",
+       "resetFailed": "Reset failed: {msg}",
        "saving": "Saving Environment...",
-       "saveFailed": "Save failed: ${msg}",
+       "saveFailed": "Save failed: {msg}",
        "saveSuccess": "Save success!",
        "deleting": "Deleting Environment...",
        "deleteSuccess": "Delete success!",
-       "deleteFailed": "Delete failed: ${msg}",
+       "deleteFailed": "Delete failed: {msg}",
        "switching": "Switching Environment...",
        "switchSuccess": "Switch success!",
-       "switchFailed": "Switch failed: ${msg}"
+       "switchFailed": "Switch failed: {msg}"
    },
    "addEnvironment": "Add environment",
    "selectEnvironment": "Select operating environment",
