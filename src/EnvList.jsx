@@ -10,6 +10,7 @@ import ServerInfo from './ServerInfo';
 import getSvg from '../static';
 import settings from 'app/settings'
 import EnvListSelector from './EnvListSelector';
+import EnvListRenameModal from './EnvListRenameModal';
 
 const Modal = global.sdk.Modal;
 const i18n = global.i18n;
@@ -27,6 +28,7 @@ class EnvList extends Component {
   componentWillMount() {
     this.fetch();
     Modal.modalRegister('EnvListSelector', EnvListSelector);
+    Modal.modalRegister('EnvListRenameModal', EnvListRenameModal);
   }
   render() {
     const { envList, currentEnv, operating, operatingMessage } = this.props
@@ -45,21 +47,27 @@ class EnvList extends Component {
               </button>
             </p>
             <div className="list-group">
-              {envList.length > 0 ? (
-                envList.map((env) => {
-                  return (
-                    <EnvItem
-                      node={env}
-                      oldEnvId={this.state.oldEnvId}
-                      key={env.name}
-                      isCurrent={(currentEnv.name === env.name)}
-                      handleSave={this.handleSave}
-                      handleReset={this.handleReset}
-                      handleDelete={this.handleDelete}
-                      handleSwitch={this.handleSwitch}/>
-                  )
-                })
-              ): ''}
+              {
+                envList.length > 0
+                ?
+                (
+                  envList.map((env) => {
+                    return (
+                      <EnvItem
+                        node={env}
+                        oldEnvId={this.state.oldEnvId}
+                        key={env.name}
+                        isCurrent={(currentEnv.name === env.name)}
+                        handleRename={this.handleRename}
+                        handleReset={this.handleReset}
+                        handleDelete={this.handleDelete}
+                        handleSwitch={this.handleSwitch}/>
+                    )
+                  })
+                )
+                :
+                ''
+              }
             </div>
           </div>
         </div>
@@ -97,17 +105,21 @@ class EnvList extends Component {
       position: 'center',
       message: '选择运行环境',
     }).then((data) => {
-      this.props.actions.envSwitch({oldEnvId, newEnvId: data});
+      this.handleSwitch(oldEnvId, data);
     })
   }
-  handleSave = (e) => {
-    e.preventDefault()
-    const defaultValue = 'new-environment'
-    Modal.showModal('Prompt', {
-      message: i18n`list.newEnvironmentName`,
-      defaultValue: defaultValue,
-      selectionRange: [0, defaultValue.length]
-    }).then(this.createEnv)
+  handleRename = (node, e) => {
+    e.preventDefault();
+    const lang = language.value;
+    Modal.showModal({ type: 'EnvListRenameModal' }).then(({ displayName, desc }) => {
+      if (!displayName) {
+        displayName = node.displayName;
+      }
+      if (!desc) {
+        desc = lang === 'English' ? node.description : node.descriptionCN;
+      }
+      this.props.actions.envRename({ envId: node.name, displayName, desc });
+    });
   }
   handleReset = async (name, e) => {
     e.preventDefault()
@@ -120,10 +132,6 @@ class EnvList extends Component {
     if (confirmed) {
       this.props.actions.envReset()
     }
-  }
-  createEnv = (name) => {
-    Modal.dismissModal()
-    this.props.actions.envSave({ name })
   }
   handleDelete = async (name, e) => {
     e.preventDefault()
@@ -138,10 +146,10 @@ class EnvList extends Component {
     }
   }
   handleSwitch = async (oldEnvId, newEnvId, e) => {
-    e.preventDefault()
+    e && e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
       header: i18n`list.handleSwitch.header`,
-      message: i18n`list.handleSwitch.message${{ newEnvId }}`,
+      message: i18n`list.handleSwitch.message${{ name: newEnvId }}`,
       okText: i18n`list.handleSwitch.okText`,
     })
     Modal.dismissModal()
@@ -158,7 +166,7 @@ class EnvList extends Component {
 class EnvItem extends Component {
   render() {
     const languageValue = language.value
-    const { oldEnvId, node, isCurrent, handleSave, handleReset, handleDelete, handleSwitch } = this.props;
+    const { oldEnvId, node, isCurrent, handleRename, handleReset, handleDelete, handleSwitch } = this.props;
     const isShared = (node.owner && (node.owner.globalKey !== config.owner.globalKey))
     if (node.name === 'ide-tty') {
       node.description = ' Ubuntu 14.04.4 with Python 2.7.12, Python 3.5.2'
@@ -176,13 +184,13 @@ class EnvItem extends Component {
           ?
           (
             <div className="btn-group">
-              {/* <button className="btn btn-primary btn-sm" onClick={handleSave}>
-                              <i className="fa fa-floppy-o" />
-                              {i18n`list.save`}
-                          </button> */}
               <button className="btn btn-primary btn-sm" onClick={handleReset.bind(null, node.name)}>
                 <i className="fa fa-undo" />
                 {i18n`list.reset`}
+              </button>
+              <button className="btn btn-primary btn-sm" onClick={(e) => handleRename(node, e)}>
+                <i className="fa fa-pencil" />
+                {i18n`list.handleRename.rename`}
               </button>
             </div>
           )
@@ -196,6 +204,10 @@ class EnvItem extends Component {
               <button className="btn btn-primary btn-sm" disabled={isShared || node.name === 'ide-tty'} onClick={handleDelete.bind(null, node.name)}>
                 <i className="fa fa-trash-o" />
                 {i18n`list.delete`}
+              </button>
+              <button className="btn btn-primary btn-sm" onClick={(e) => handleRename(node, e)}>
+                <i className="fa fa-pencil" />
+                {i18n`list.handleRename.rename`}
               </button>
             </div>
           )
