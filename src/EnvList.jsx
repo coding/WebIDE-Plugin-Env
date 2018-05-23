@@ -110,13 +110,13 @@ class EnvList extends Component {
   }
   handleRename = (node, e) => {
     e.preventDefault();
+    const lang = language.value;
     Modal.showModal({ type: 'EnvListRenameModal' }).then(({ displayName, desc }) => {
-      console.log(node)
       if (!displayName) {
         displayName = node.displayName;
       }
       if (!desc) {
-        desc = node.descriptionCN;
+        desc = lang === 'English' ? node.description : node.descriptionCN;
       }
       this.props.actions.envRename({ envId: node.name, displayName, desc });
     });

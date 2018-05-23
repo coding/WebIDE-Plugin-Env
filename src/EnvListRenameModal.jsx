@@ -34,6 +34,14 @@ class EnvListRenameModal extends Component {
     }
   }
 
+  handleEnter = (e) => {
+    if (e.keyCode === 13) {
+      if (this.state.displayName || this.state.desc) {
+        this.handleSubmit();
+      }
+    }
+  }
+
   handleSubmit = () => {
     this.props.meta.resolve({
       displayName: this.state.displayName,
@@ -52,11 +60,11 @@ class EnvListRenameModal extends Component {
         <div className="title">{i18n.get('list.handleRename.renameTitle')}</div>
         <div>
           <div className="label">{i18n.get('list.handleRename.envName')}</div>
-          <input className="form-control" type="text" onChange={this.handleName} />
+          <input className="form-control" type="text" onChange={this.handleName} onKeyUp={this.handleEnter} />
         </div>
         <div>
           <div className="label">{i18n.get('list.handleRename.envDesc')}</div>
-          <input className="form-control" type="text" onChange={this.handleDesc} />
+          <input className="form-control" type="text" onChange={this.handleDesc} onKeyUp={this.handleEnter} />
         </div>
         <div className="control">
           <button className="btn btn-default" onClick={this.handleCancel}>{i18n.get('list.cancelButton')}</button>
