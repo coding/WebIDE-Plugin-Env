@@ -152,3 +152,24 @@ export function envSwitch({ oldEnvId, newEnvId }) {
       });
   };
 }
+
+export function envRename({ envId, displayName, desc }) {
+  return (dispatch) => {
+    api.envRename({ envId, displayName, desc }).then(res => {
+      if (res.code && res.code !== 0) {
+        notify({
+          notifyType: NOTIFY_TYPE.ERROR,
+          message: i18n`list.handleRename.renameFailed${{ msg: res.msg }}`,
+        });
+      } else {
+        notify({ message: i18n`list.handleRename.renameSuccess` });
+        dispatch(envList());
+      }
+    }).catch(res => {
+      notify({
+        notifyType: NOTIFY_TYPE.ERROR,
+        message: i18n`list.handleRename.renameFailed${{ msg: res.msg }}`,
+      });
+    });
+  }
+}

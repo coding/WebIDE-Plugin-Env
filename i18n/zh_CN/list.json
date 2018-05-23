@@ -17,11 +17,17 @@
     },
     "handleSwitch": {
         "header": "你是否确定切换环境",
-        "message": "正在切换环境 {newEnvId}, 所有当前环境未保存的数据将丢失",
+        "message": "正在切换环境 {newEnvId}",
         "okText": "切换"
     },
-    "save": "保存",
-    "newEnvironmentName": "请输入新环境的名称",
+    "handleRename": {
+      "rename": "重命名",
+      "renameTitle": "请输入新的环境名称和环境描述",
+      "envName": "环境名称",
+      "envDesc": "环境描述",
+      "renameSuccess": "重命名成功",
+      "renameFailed": "重命名失败"
+    },
     "currentEnv": "当前环境",
     "envList": "环境列表",
     "message": {
@@ -40,5 +46,7 @@
     },
     "addEnvironment": "添加环境",
     "selectEnvironment": "选择运行环境",
-    "presetEnvironment": "预设环境"
+    "presetEnvironment": "预设环境",
+    "okButton": "确定",
+    "cancelButton": "取消"
 }

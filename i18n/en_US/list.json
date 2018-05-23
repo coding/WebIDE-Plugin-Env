@@ -17,11 +17,17 @@
    },
    "handleSwitch": {
       "header": "Are you sure to switch environment?",
-      "message": "You're trying to switch to environment {newEnvId}, all unsaved changes to current environment will be lost.",
+      "message": "You're trying to switch to environment {newEnvId}",
       "okText": "Switch"
    },
-   "save": "Save",
-   "newEnvironmentName": "Enter the name for the new environment.",
+   "handleRename": {
+     "rename": "Rename",
+     "renameTitle": "Please enter a new env displayName and new env description",
+     "envName": "Env displayName",
+     "envDesc": "Env Description",
+     "renameSuccess": "Rename success",
+     "renameFailed": "Rename failed"
+   },
    "currentEnv": "Current Env",
    "envList": "Env List",
    "message": {
@@ -40,5 +46,7 @@
    },
    "addEnvironment": "Add environment",
    "selectEnvironment": "Select operating environment",
-   "presetEnvironment": "Preset environment"
+   "presetEnvironment": "Preset environment",
+   "okButton": "OK",
+   "cancelButton": "Cancel"
 }
