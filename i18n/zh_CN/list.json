@@ -17,7 +17,7 @@
     },
     "handleSwitch": {
         "header": "你是否确定切换环境",
-        "message": "正在切换环境 {newEnvId}",
+        "message": "正在切换环境 {name}",
         "okText": "切换"
     },
     "handleRename": {

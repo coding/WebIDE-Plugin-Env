@@ -17,7 +17,7 @@
    },
    "handleSwitch": {
       "header": "Are you sure to switch environment?",
-      "message": "You're trying to switch to environment {newEnvId}",
+      "message": "You're trying to switch to environment {name}",
       "okText": "Switch"
    },
    "handleRename": {

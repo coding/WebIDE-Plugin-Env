@@ -149,7 +149,7 @@ class EnvList extends Component {
     e && e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
       header: i18n`list.handleSwitch.header`,
-      message: i18n`list.handleSwitch.message${{ newEnvId }}`,
+      message: i18n`list.handleSwitch.message${{ name: newEnvId }}`,
       okText: i18n`list.handleSwitch.okText`,
     })
     Modal.dismissModal()
