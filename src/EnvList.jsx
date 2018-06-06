@@ -52,15 +52,14 @@ class EnvList extends Component {
                 (
                   envList.map((env) => {
                     // 处理名字的前缀和后缀
-                    const arr = env.name.split('_');
-                    env.name = arr[arr.length - 1];
+                    env.name = this.splitEnvName(env.name);
                     env.displayName = env.displayName.split('(')[0];
                     return (
                       <EnvItem
                         node={env}
                         oldEnvId={this.state.oldEnvId}
                         key={env.name}
-                        isCurrent={env.name === this.state.currentEnv}
+                        isCurrent={env.name === this.splitEnvName(this.state.currentEnv)}
                         handleRename={this.handleRename}
                         handleReset={this.handleReset}
                         handleDelete={this.handleDelete}
@@ -86,8 +85,12 @@ class EnvList extends Component {
       </div>
     );
   }
+  splitEnvName = (name) => {
+    const arr = name.split('_');
+    return arr[arr.length - 1];
+  }
   fetch = () => {
-    const { actions, currentEnv } = this.props
+    const { actions } = this.props
     const envIdPromise = actions.envId()
     const envListPromise = actions.envList()
     Promise.all([envIdPromise, envListPromise]).then((res) => {
