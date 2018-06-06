@@ -291,9 +291,11 @@
         margin: 50px auto;
       }
     }
-    .env-item-modal.capable:hover {
-      border-color: #5e9ef3;
-      cursor: pointer;
+    .env-item-modal.disabled {
+      cursor: not-allowed;
+      &:hover {
+        border-color: #444;
+      }
     }
     .env-item-modal {
       width: calc(50% - 5px);
@@ -302,16 +304,27 @@
       margin-bottom: 10px;
       height: 58px;
       padding: 10px 10px 10px 8px;
-      cursor: not-allowed;
+      cursor: pointer;
       user-select: none;
       position: relative;
       &:last-child {
         margin-bottom: 0px;
       }
+      &:hover {
+        border-color: $modified-color;
+      }
       .env-item-heading {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         font-weight: bolder;
+        .name {
+          display: flex;
+          align-items: center;
+        }
+        .added {
+          font-size: 10px;
+        }
         .env-icon {
           display: inline-block;
           width: 18px;

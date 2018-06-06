@@ -43,6 +43,7 @@ export const updateEnvId = createAction(ENV_ID);
 export function envId() {
   return dispatch => api.envId().then((res) => {
     dispatch(updateEnvId({ currentEnv: res }));
+    return res;
   });
 }
 
@@ -127,20 +128,22 @@ export function envSwitch({ oldEnvId, newEnvId }) {
   return (dispatch) => {
     // dispatch(envOperating({ operating: true, msg: 'Switching Environment...' }));
     maskActions.showMask({ message: i18n`list.message.switching` });
-    api.envSwitch({ oldEnvId, newEnvId })
+    return api.envSwitch({ oldEnvId, newEnvId })
       .then((res) => {
+        maskActions.hideMask();
         if (res.code && res.code !== 0) {
           notify({
             notifyType: NOTIFY_TYPE.ERROR,
             message: i18n`list.message.switchFailed${{ msg: res.msg }}`,
           });
+          return false;
         } else {
           notify({ message: i18n`list.message.switchSuccess` });
           dispatch(envList());
           dispatch(updateEnvId({ currentEnv: { name: newEnvId} }));
+          return true;
         }
         // dispatch(envOperating({ operating: false }));
-        maskActions.hideMask();
       })
       .catch((res) => {
         // dispatch(envOperating({ operating: false }));
@@ -149,6 +152,7 @@ export function envSwitch({ oldEnvId, newEnvId }) {
           notifyType: NOTIFY_TYPE.ERROR,
           message: i18n`list.message.switchFailed${{ msg: res.msg }}`,
         });
+        return false;
       });
   };
 }

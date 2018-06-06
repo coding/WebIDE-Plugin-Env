@@ -8,10 +8,14 @@ class EnvListRenameModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayName: '',
-      desc: '',
+      displayName: props.content.displayName,
+      desc: props.content.desc,
       disabled: true,
     };
+  }
+
+  componentDidMount() {
+    this.refs.input.focus();
   }
 
   handleName = (e) => {
@@ -60,11 +64,11 @@ class EnvListRenameModal extends Component {
         <div className="title">{i18n.get('list.handleRename.renameTitle')}</div>
         <div>
           <div className="label">{i18n.get('list.handleRename.envName')}</div>
-          <input className="form-control" type="text" onChange={this.handleName} onKeyUp={this.handleEnter} />
+          <input className="form-control" type="text" value={this.state.displayName} onChange={this.handleName} onKeyUp={this.handleEnter} ref="input" />
         </div>
         <div>
           <div className="label">{i18n.get('list.handleRename.envDesc')}</div>
-          <input className="form-control" type="text" onChange={this.handleDesc} onKeyUp={this.handleEnter} />
+          <input className="form-control" type="text" value={this.state.desc} onChange={this.handleDesc} onKeyUp={this.handleEnter} />
         </div>
         <div className="control">
           <button className="btn btn-default" onClick={this.handleCancel}>{i18n.get('list.cancelButton')}</button>

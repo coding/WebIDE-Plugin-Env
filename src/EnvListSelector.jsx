@@ -8,10 +8,10 @@ import global from './global';
 
 const i18n = global.i18n;
 const Modal = global.sdk.Modal;
-const language = settings.general.language.value;
 
 const EnvItem = observer(({ node, userEnv, handleClick }) => {
-  let capable = true;
+  const description = settings.general.language.value === 'English' ? node.description : node.descriptionCN;
+  let disabled = false;
   if (node.name === 'ide-tty') {
     node.description = ' Ubuntu 14.04.4';
     node.descriptionCN = ' Ubuntu 14.04.4';
@@ -19,18 +19,37 @@ const EnvItem = observer(({ node, userEnv, handleClick }) => {
   for (let i = 0, n = userEnv.length; i < n; i++) {
     const env = userEnv[i].name;
     if (env.indexOf(node.name) !== -1) {
-      capable = false;
+      disabled = true;
       break;
     }
   }
   return (
-    <div className={`env-item-modal ${capable ? 'capable' : ''}`} onClick={() => {capable ? handleClick(node.name) : ''}}>
-      <div className='env-item-heading'>
-        {getSvg(node.displayName)}
-        {node.displayName}
+    disabled
+    ?
+    (
+      <div className="env-item-modal disabled">
+        <div className='env-item-heading'>
+          <span className="name">
+            {getSvg(node.name)}
+            {node.displayName}
+          </span>
+          <span className="added">{i18n.get('list.added')}</span>
+        </div>
+        <div className='env-item-body'>{description}</div>
       </div>
-      <div className='env-item-body'>{language === 'English' ? node.description : node.descriptionCN}</div>
-    </div>
+    )
+    :
+    (
+      <div className="env-item-modal" onClick={() => handleClick(node.name)}>
+        <div className='env-item-heading'>
+          <span className="name">
+            {getSvg(node.name)}
+            {node.displayName}
+          </span>
+        </div>
+        <div className='env-item-body'>{description}</div>
+      </div>
+    )
   );
 });
 
@@ -47,8 +66,8 @@ class EnvListSelector extends Component {
       userEnv: [],
     }
     defaultEnvList()
-      .then((response) => {
-        this.setState({ defaultEnv: response })
+      .then((res) => {
+        this.setState({ defaultEnv: res })
       });
     envList()
       .then((res) => {
@@ -77,7 +96,7 @@ class EnvListSelector extends Component {
     return (
       <div className='modal-content' style={{ width: 640 }}>
         <div className='env-list-selector-header'>{i18n`list.selectEnvironment`}</div>
-        <div className='fixed-line' />
+        <div className='fixed-line'></div>
         <div className='env-list-content'>
           <p className='env-list-little-header'>{i18n`list.presetEnvironment`}</p>
           <div className='env-list-list-item'>{this.renderEnvItems(defaultEnv, userEnv)}</div>
