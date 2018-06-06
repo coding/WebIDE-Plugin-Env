@@ -47,6 +47,7 @@
     "addEnvironment": "添加环境",
     "selectEnvironment": "选择运行环境",
     "presetEnvironment": "预设环境",
+    "added": "已添加",
     "okButton": "确定",
     "cancelButton": "取消"
 }
