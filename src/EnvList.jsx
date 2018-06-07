@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'lib/react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { autorun } from 'lib/mobx';
 import { observer } from 'lib/mobxReact';
 import * as EnvActions from './actions';
 import cx from 'classnames';
@@ -13,7 +14,12 @@ import EnvListRenameModal from './EnvListRenameModal';
 
 const Modal = global.sdk.Modal;
 const i18n = global.i18n;
-const isDefaultProject = global.sdk.config.projectName === 'cloudstudio-default';
+let isDefaultProject = false;
+autorun(() => {
+  if (global.sdk.config && global.sdk.config.projectName === 'cloudstudio-default') {
+    isDefaultProject = true;
+  }
+})
 const language = settings.general.language;
 
 class EnvList extends Component {
@@ -30,7 +36,7 @@ class EnvList extends Component {
     Modal.modalRegister('EnvListRenameModal', EnvListRenameModal);
   }
   render() {
-    const { envList, operating, operatingMessage } = this.props
+    const { envList, currentEnv, operating, operatingMessage } = this.props;
     return (
       <div className="env-list">
       <div className="env-list-container">
@@ -41,7 +47,7 @@ class EnvList extends Component {
           <div className="panel-body">
             <ServerInfo />
             <p className="env-add-button">
-              <button className="btn btn-default" onClick={(e) => this.handleAddAEnv(this.state.oldEnvId, e)}>
+              <button className="btn btn-default" onClick={this.handleAddEnv}>
                 + {i18n`list.addEnvironment`}
               </button>
             </p>
@@ -52,18 +58,18 @@ class EnvList extends Component {
                 (
                   envList.map((env) => {
                     // 处理名字的前缀和后缀
-                    env.name = this.splitEnvName(env.name);
                     env.displayName = env.displayName.split('(')[0];
                     return (
                       <EnvItem
                         node={env}
                         oldEnvId={this.state.oldEnvId}
                         key={env.name}
-                        isCurrent={env.name === this.splitEnvName(this.state.currentEnv)}
+                        isCurrent={this.splitEnvName(env.name) === this.splitEnvName(currentEnv.name)}
                         handleRename={this.handleRename}
                         handleReset={this.handleReset}
                         handleDelete={this.handleDelete}
-                        handleSwitch={this.handleSwitch} />
+                        handleSwitch={this.handleSwitch}
+                        splitEnvName={this.splitEnvName} />
                     )
                   })
                 )
@@ -86,29 +92,32 @@ class EnvList extends Component {
     );
   }
   splitEnvName = (name) => {
+    if (!name) {
+      return '';
+    }
     const arr = name.split('_');
     return arr[arr.length - 1];
   }
   fetch = () => {
-    const { actions } = this.props
-    const envIdPromise = actions.envId()
-    const envListPromise = actions.envList()
+    const { actions } = this.props;
+    const envIdPromise = actions.envId();
+    const envListPromise = actions.envList();
     Promise.all([envIdPromise, envListPromise]).then((res) => {
       const currentEnv = res[0].name;
       this.setState({
         oldEnvId: currentEnv,
         currentEnv: currentEnv,
-      })
-    })
+      });
+    });
   }
-  handleAddAEnv = (oldEnvId, e) => {
+  handleAddEnv = (e) => {
     e.preventDefault()
     Modal.showModal({
       type: 'EnvListSelector',
       position: 'center',
       message: i18n.get('list.selectEnvironment'),
-    }).then((newEnvId) => {
-      this.handleSwitch(oldEnvId, newEnvId);
+    }).then(newEnvId => {
+      this.handleSwitch(this.state.oldEnvId, newEnvId);
     })
   }
   handleRename = (node, e) => {
@@ -176,10 +185,10 @@ class EnvList extends Component {
 class EnvItem extends Component {
   render() {
     const lang = language.value;
-    const { oldEnvId, node, isCurrent, handleRename, handleReset, handleDelete, handleSwitch } = this.props;
+    const { oldEnvId, node, isCurrent, handleRename, handleReset, handleDelete, handleSwitch, splitEnvName } = this.props;
     // const isShared = (node.owner && (node.owner.globalKey !== config.owner.globalKey))
-    const isDefaultEnv = node.name === 'ide-tty';
-    const isThreeInOneEnv = node.name === 'ide-tty-php-python-java';
+    const isDefaultEnv = splitEnvName(node.name) === 'ide-tty';
+    const isThreeInOneEnv = splitEnvName(node.name) === 'ide-tty-php-python-java';
     if (isDefaultEnv) {
       node.description = ' Ubuntu 14.04.4 with Python 2.7.12, Python 3.5.2';
       node.descriptionCN = ' Ubuntu 14.04.4 已安装 Python 2.7.12，Python 3.5.2';
@@ -196,7 +205,7 @@ class EnvItem extends Component {
           ?
           (
             <div className="btn-group">
-              <button className="btn btn-primary btn-sm" onClick={() => handleReset(node.name)}>
+              <button className="btn btn-primary btn-sm" onClick={(e) => handleReset(node.name, e)}>
                 <i className="fa fa-undo" />
                 {i18n`list.reset`}
               </button>
@@ -205,11 +214,11 @@ class EnvItem extends Component {
           :
           (
             <div className="btn-group">
-              <button className="btn btn-primary btn-sm" onClick={() => handleSwitch(oldEnvId, node.name)}>
+              <button className="btn btn-primary btn-sm" onClick={(e) => handleSwitch(oldEnvId, node.name, e)}>
                 <i className="fa fa-play" />
                 {i18n`list.use`}
               </button>
-              <button className="btn btn-primary btn-sm" disabled={isDefaultEnv || (isDefaultProject && isThreeInOneEnv)} onClick={() => handleDelete(node.name)}>
+              <button className="btn btn-primary btn-sm" disabled={isDefaultEnv || (isDefaultProject && isThreeInOneEnv)} onClick={(e) => handleDelete(node.name, e)}>
                 <i className="fa fa-trash-o" />
                 {i18n`list.delete`}
               </button>
