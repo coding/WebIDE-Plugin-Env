@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'lib/react';
 import settings from 'app/settings';
 import { observer } from 'lib/mobxReact';
-import { defaultEnvList, envList } from './api';
+import { defaultEnvList } from './api';
 
 import getSvg from '../static';
 import global from './global';
@@ -9,7 +9,7 @@ import global from './global';
 const i18n = global.i18n;
 const Modal = global.sdk.Modal;
 
-const EnvItem = observer(({ node, userEnv, handleClick }) => {
+const EnvItem = observer(({ node, userEnv, handleClick, splitEnvName }) => {
   const description = settings.general.language.value === 'English' ? node.description : node.descriptionCN;
   let disabled = false;
   if (node.name === 'ide-tty') {
@@ -18,7 +18,7 @@ const EnvItem = observer(({ node, userEnv, handleClick }) => {
   }
   for (let i = 0, n = userEnv.length; i < n; i++) {
     const env = userEnv[i].name;
-    if (env.indexOf(node.name) !== -1) {
+    if (splitEnvName(env) === node.name) {
       disabled = true;
       break;
     }
@@ -63,16 +63,8 @@ class EnvListSelector extends Component {
     super(props);
     this.state = {
       defaultEnv: [],
-      userEnv: [],
     }
-    defaultEnvList()
-      .then((res) => {
-        this.setState({ defaultEnv: res })
-      });
-    envList()
-      .then((res) => {
-        this.setState({ userEnv: res });
-      });
+    defaultEnvList().then(res => this.setState({ defaultEnv: res }));
   }
 
   handleClick = (name) => {
@@ -87,19 +79,21 @@ class EnvListSelector extends Component {
         userEnv={userEnv}
         key={env.name}
         handleClick={this.handleClick}
+        splitEnvName={this.props.content.splitEnvName}
       />
     ))
   )
 
   render () {
-    const { defaultEnv, userEnv } = this.state
+    const { defaultEnv } = this.state;
+    const style = { width: 600 };
     return (
-      <div className='modal-content' style={{ width: 640 }}>
+      <div className='modal-content' style={style}>
         <div className='env-list-selector-header'>{i18n`list.selectEnvironment`}</div>
         <div className='fixed-line'></div>
         <div className='env-list-content'>
           <p className='env-list-little-header'>{i18n`list.presetEnvironment`}</p>
-          <div className='env-list-list-item'>{this.renderEnvItems(defaultEnv, userEnv)}</div>
+          <div className='env-list-list-item'>{this.renderEnvItems(defaultEnv, this.props.content.envList)}</div>
         </div>
       </div>
     );
