@@ -142,7 +142,11 @@ class EnvList extends Component {
     })
     Modal.dismissModal()
     if (confirmed) {
-      this.props.actions.envReset()
+      this.props.actions.envReset().then(res => {
+        if (res) {
+          this.setState({ oldEnvId: this.splitEnvName(this.state.oldEnvId) });
+        }
+      })
     }
   }
   handleDelete = async (name, e) => {
