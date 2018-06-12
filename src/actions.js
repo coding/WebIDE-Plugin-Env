@@ -51,17 +51,19 @@ export function envReset() {
   return (dispatch) => {
     // dispatch(envOperating({ operating: true, msg: 'Resetting Environment...' }));
     maskActions.showMask({ message: i18n`list.message.resetting` });
-    api.envReset()
+    return api.envReset()
       .then((res) => {
         // dispatch(envOperating({ operating: false }));
         dispatch(envList());
         notify({ message: i18n`list.message.resetSuccess` });
         maskActions.hideMask();
+        return true;
       })
       .catch((err) => {
         // dispatch(envOperating({ operating: false }));
         notify({ message: i18n`list.message.resetFailed${{ msg: err.msg }}` });
         maskActions.hideMask();
+        return false;
       });
   };
 }

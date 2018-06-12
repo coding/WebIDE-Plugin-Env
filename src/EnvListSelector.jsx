@@ -10,12 +10,12 @@ const i18n = global.i18n;
 const Modal = global.sdk.Modal;
 
 const EnvItem = observer(({ node, userEnv, handleClick, splitEnvName }) => {
-  const description = settings.general.language.value === 'English' ? node.description : node.descriptionCN;
-  let disabled = false;
   if (node.name === 'ide-tty') {
     node.description = ' Ubuntu 14.04.4';
     node.descriptionCN = ' Ubuntu 14.04.4';
   }
+  const description = settings.general.language.value === 'English' ? node.description : node.descriptionCN;
+  let disabled = false;
   for (let i = 0, n = userEnv.length; i < n; i++) {
     const env = userEnv[i].name;
     if (splitEnvName(env) === node.name) {
