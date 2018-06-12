@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'lib/react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { autorun } from 'lib/mobx';
 import { observer } from 'lib/mobxReact';
 import * as EnvActions from './actions';
 import cx from 'classnames';
@@ -14,12 +13,6 @@ import EnvListRenameModal from './EnvListRenameModal';
 
 const Modal = global.sdk.Modal;
 const i18n = global.i18n;
-let isDefaultProject = false;
-autorun(() => {
-  if (global.sdk.config && global.sdk.config.projectName === 'cloudstudio-default') {
-    isDefaultProject = true;
-  }
-})
 const language = settings.general.language;
 
 class EnvList extends Component {
@@ -69,7 +62,7 @@ class EnvList extends Component {
                         handleReset={this.handleReset}
                         handleDelete={this.handleDelete}
                         handleSwitch={this.handleSwitch}
-                        splitEnvName={this.splitEnvName} />
+                      />
                     )
                   })
                 )
@@ -115,6 +108,7 @@ class EnvList extends Component {
     Modal.showModal({
       type: 'EnvListSelector',
       position: 'center',
+      content: { splitEnvName: this.splitEnvName, envList: this.props.envList },
       message: i18n.get('list.selectEnvironment'),
     }).then(newEnvId => {
       this.handleSwitch(this.state.oldEnvId, newEnvId);
@@ -185,14 +179,8 @@ class EnvList extends Component {
 class EnvItem extends Component {
   render() {
     const lang = language.value;
-    const { oldEnvId, node, isCurrent, handleRename, handleReset, handleDelete, handleSwitch, splitEnvName } = this.props;
+    const { oldEnvId, node, isCurrent, handleRename, handleReset, handleDelete, handleSwitch } = this.props;
     // const isShared = (node.owner && (node.owner.globalKey !== config.owner.globalKey))
-    const isDefaultEnv = splitEnvName(node.name) === 'ide-tty';
-    const isThreeInOneEnv = splitEnvName(node.name) === 'ide-tty-php-python-java';
-    if (isDefaultEnv) {
-      node.description = ' Ubuntu 14.04.4 with Python 2.7.12, Python 3.5.2';
-      node.descriptionCN = ' Ubuntu 14.04.4 已安装 Python 2.7.12，Python 3.5.2';
-    }
     return (
       <div className={cx('env-item', { current: isCurrent })}>
         <div className="env-item-heading">
@@ -209,6 +197,13 @@ class EnvItem extends Component {
                 <i className="fa fa-undo" />
                 {i18n`list.reset`}
               </button>
+              {
+                !node.isGlobal &&
+                <button className="btn btn-primary btn-sm" onClick={(e) => handleRename(node, e)}>
+                  <i className="fa fa-pencil" />
+                  {i18n`list.handleRename.rename`}
+                </button>
+              }
             </div>
           )
           :
@@ -218,14 +213,17 @@ class EnvItem extends Component {
                 <i className="fa fa-play" />
                 {i18n`list.use`}
               </button>
-              <button className="btn btn-primary btn-sm" disabled={isDefaultEnv || (isDefaultProject && isThreeInOneEnv)} onClick={(e) => handleDelete(node.name, e)}>
+              <button className="btn btn-primary btn-sm" onClick={(e) => handleDelete(node.name, e)}>
                 <i className="fa fa-trash-o" />
                 {i18n`list.delete`}
               </button>
-              <button className="btn btn-primary btn-sm" onClick={(e) => handleRename(node, e)}>
-                <i className="fa fa-pencil" />
-                {i18n`list.handleRename.rename`}
-              </button>
+              {
+                !node.isGlobal &&
+                <button className="btn btn-primary btn-sm" onClick={(e) => handleRename(node, e)}>
+                  <i className="fa fa-pencil" />
+                  {i18n`list.handleRename.rename`}
+                </button>
+              }
             </div>
           )
         }

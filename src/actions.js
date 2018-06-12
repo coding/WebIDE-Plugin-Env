@@ -54,6 +54,7 @@ export function envReset() {
     api.envReset()
       .then((res) => {
         // dispatch(envOperating({ operating: false }));
+        dispatch(envList());
         notify({ message: i18n`list.message.resetSuccess` });
         maskActions.hideMask();
       })
@@ -138,9 +139,9 @@ export function envSwitch({ oldEnvId, newEnvId }) {
           });
           return false;
         } else {
-          notify({ message: i18n`list.message.switchSuccess` });
           dispatch(envList());
           dispatch(updateEnvId({ currentEnv: { name: newEnvId} }));
+          notify({ message: i18n`list.message.switchSuccess` });
           return true;
         }
         // dispatch(envOperating({ operating: false }));
@@ -166,8 +167,8 @@ export function envRename({ envId, displayName, desc }) {
           message: i18n`list.handleRename.renameFailed${{ msg: res.msg }}`,
         });
       } else {
-        notify({ message: i18n`list.handleRename.renameSuccess` });
         dispatch(envList());
+        notify({ message: i18n`list.handleRename.renameSuccess` });
       }
     }).catch(res => {
       notify({
