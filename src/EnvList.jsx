@@ -130,7 +130,7 @@ class EnvList extends Component {
       if (!desc) {
         desc = description;
       }
-      this.props.actions.envRename({ envId: node.name, displayName, desc });
+      this.props.actions.envRename({ envId: node.name, isGlobal: node.isGlobal, displayName, desc });
     });
   }
   handleReset = async (name, e) => {
@@ -190,24 +190,19 @@ class EnvItem extends Component {
         <div className="env-item-body">{lang === 'English' ? node.description : node.descriptionCN}</div>
         {
           isCurrent
-          ?
-          (
+          ? (
             <div className="btn-group">
               <button className="btn btn-primary btn-sm" onClick={(e) => handleReset(node.name, e)}>
                 <i className="fa fa-undo" />
                 {i18n`list.reset`}
               </button>
-              {
-                !node.isGlobal &&
-                <button className="btn btn-primary btn-sm" onClick={(e) => handleRename(node, e)}>
-                  <i className="fa fa-pencil" />
-                  {i18n`list.handleRename.rename`}
-                </button>
-              }
+              <button className="btn btn-primary btn-sm" onClick={(e) => handleRename(node, e)}>
+                <i className="fa fa-pencil" />
+                {i18n`list.handleRename.rename`}
+              </button>
             </div>
           )
-          :
-          (
+          : (
             <div className="btn-group">
               <button className="btn btn-primary btn-sm" onClick={(e) => handleSwitch(oldEnvId, node.name, e)}>
                 <i className="fa fa-play" />
@@ -217,13 +212,10 @@ class EnvItem extends Component {
                 <i className="fa fa-trash-o" />
                 {i18n`list.delete`}
               </button>
-              {
-                !node.isGlobal &&
-                <button className="btn btn-primary btn-sm" onClick={(e) => handleRename(node, e)}>
-                  <i className="fa fa-pencil" />
-                  {i18n`list.handleRename.rename`}
-                </button>
-              }
+              <button className="btn btn-primary btn-sm" onClick={(e) => handleRename(node, e)}>
+                <i className="fa fa-pencil" />
+                {i18n`list.handleRename.rename`}
+              </button>
             </div>
           )
         }
