@@ -31,6 +31,6 @@ export function defaultEnvList() {
   return request.get(`/tty/${config.spaceKey}/env_list`);
 }
 
-export function envRename({ envId, displayName, desc }) {
-  return request.post(`/tty/${config.spaceKey}/used`, { envId, displayName, desc });
+export function envRename({ envId, isGlobal, displayName, desc }) {
+  return request.post(`/tty/${config.spaceKey}/used`, { envId, isGlobal, displayName, desc });
 }

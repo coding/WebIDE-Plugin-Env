@@ -160,9 +160,9 @@ export function envSwitch({ oldEnvId, newEnvId }) {
   };
 }
 
-export function envRename({ envId, displayName, desc }) {
+export function envRename({ envId, isGlobal, displayName, desc }) {
   return (dispatch) => {
-    api.envRename({ envId, displayName, desc }).then(res => {
+    api.envRename({ envId, isGlobal, displayName, desc }).then(res => {
       if (res.code && res.code !== 0) {
         notify({
           notifyType: NOTIFY_TYPE.ERROR,
