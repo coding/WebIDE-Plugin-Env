@@ -23,11 +23,6 @@ class EnvList extends Component {
       currentEnv: '',
     }
   }
-  componentDidMount() {
-    this.fetch();
-    Modal.modalRegister('EnvListSelector', EnvListSelector);
-    Modal.modalRegister('EnvListRenameModal', EnvListRenameModal);
-  }
   render() {
     const { envList, currentEnv, operating, operatingMessage } = this.props;
     return (
@@ -83,6 +78,25 @@ class EnvList extends Component {
         </div>
       </div>
     );
+  }
+  componentDidMount() {
+    this.fetch();
+    Modal.modalRegister('EnvListSelector', EnvListSelector);
+    Modal.modalRegister('EnvListRenameModal', EnvListRenameModal);
+  }
+  componentDidUpdate() {
+    const { envList } = this.props;
+    const { oldEnvId } = this.state;
+    if (Object.prototype.toString.call(envList) !== '[object Array]') {
+      return;
+    }
+    for (let i = 0, n = envList.length; i < n; i++) {
+      const env = envList[i].name;
+      if (env !== oldEnvId && env.endsWith(oldEnvId)) {
+        this.setState({ oldEnvId: env });
+        break;
+      }
+    }
   }
   splitEnvName = (name) => {
     if (!name) {
