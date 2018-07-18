@@ -8,6 +8,7 @@ const appRegistry = require('webide-plugin-sdk/utils').appRegistry;
 appRegistry([{
   app,
   Manager: require('./manager').default,
+  weight: 10,
   key: 'env',
 },
 {
