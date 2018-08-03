@@ -16,13 +16,9 @@ const i18n = global.i18n;
 const language = settings.general.language;
 
 class EnvList extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      oldEnvId: '',
-      currentEnv: '',
-    }
-  }
+  state = { oldEnvId: '', currentEnv: '' };
+  justReset = false;
+
   render() {
     const { envList, currentEnv, operating, operatingMessage } = this.props;
     return (
@@ -88,6 +84,10 @@ class EnvList extends Component {
     const { envList } = this.props;
     const { oldEnvId } = this.state;
     if (Object.prototype.toString.call(envList) !== '[object Array]') {
+      return;
+    }
+    if (this.justReset) {
+      this.justReset = false;
       return;
     }
     for (let i = 0, n = envList.length; i < n; i++) {
@@ -157,9 +157,8 @@ class EnvList extends Component {
     Modal.dismissModal()
     if (confirmed) {
       this.props.actions.envReset().then(res => {
-        if (res) {
-          this.setState({ oldEnvId: this.splitEnvName(this.state.oldEnvId) });
-        }
+        this.justReset = true;
+        this.setState({ oldEnvId: this.splitEnvName(this.state.oldEnvId) });
       })
     }
   }

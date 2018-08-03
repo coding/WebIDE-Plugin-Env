@@ -57,13 +57,11 @@ export function envReset() {
         dispatch(envList());
         notify({ message: i18n`list.message.resetSuccess` });
         maskActions.hideMask();
-        return true;
       })
       .catch((err) => {
         // dispatch(envOperating({ operating: false }));
         notify({ message: i18n`list.message.resetFailed${{ msg: err.msg }}` });
         maskActions.hideMask();
-        return false;
       });
   };
 }
