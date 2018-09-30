@@ -95,8 +95,8 @@ class EnvList extends Component {
   handleDelete = async (name, e) => {
     e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
-      header: i18n`list.handleDelete.header`,      
-      message: i18n`list.handleDelete.message${{name}}`,      
+      header: i18n`list.handleDelete.header`,
+      message: i18n`list.handleDelete.message${{name}}`,
       okText: i18n`list.handleDelete.okText`
     })
     Modal.dismissModal()
@@ -107,9 +107,9 @@ class EnvList extends Component {
   handleSwitch = async (name, e) => {
     e.preventDefault()
     var confirmed = await Modal.showModal('Confirm', {
-      header: i18n`list.handleSwitch.header`,      
-      message: i18n`list.handleSwitch.message${{name}}`,      
-      okText: i18n`list.handleSwitch.okText`,      
+      header: i18n`list.handleSwitch.header`,
+      message: i18n`list.handleSwitch.message${{name}}`,
+      okText: i18n`list.handleSwitch.okText`,
     })
     Modal.dismissModal()
     if (confirmed) {
@@ -139,8 +139,9 @@ const EnvItem = ({node, isCurrent, handleSave, handleReset, handleDelete, handle
     <div className={cx('env-item', { current: isCurrent })}>
       <div className="env-item-heading">
         <i className="fa fa-desktop" />
-        {node.isGlobal ? getSvg(node.displayName) : getSvg('share')}
-        {node.displayName}
+        {/* {node.isGlobal ? getSvg(node.displayName) : getSvg('share')} */}
+        {node.isGlobal ? <span className="env-label env-public">{i18n`list.global`}</span> : ''}
+        {node.name}
       </div>
       <div className="env-item-body">
         {node.owner ? (
@@ -160,7 +161,7 @@ const EnvItem = ({node, isCurrent, handleSave, handleReset, handleDelete, handle
           </button>
           <button className="btn btn-primary btn-sm" onClick={handleReset.bind(null, node.name)}>
             <i className="fa fa-undo" />
-            {i18n`list.reset`}         
+            {i18n`list.reset`}
           </button>
         </div>
       ) : (
@@ -192,7 +193,7 @@ const mapStateToProps = (state) => {
       envList = [], currentEnv = null, operating, operatingMessage
     }
   } = state
-  return ({ 
+  return ({
     envList,
     currentEnv,
     operating,
