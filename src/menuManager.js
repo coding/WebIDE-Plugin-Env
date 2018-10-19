@@ -15,7 +15,6 @@ const { inject, position } = injectComponent;
 
 export default class extends Manager {
   pluginWillMount() {
-    console.log('plugin will mount');
     this.onEnvHide = this.onEnvHide.bind(this)
     this.onEnvShow = this.onEnvShow.bind(this)
     emitter.on(E.TERM_ENV_HIDE, this.onEnvHide)

@@ -10,7 +10,6 @@ const { inject, position } = injectComponent;
 
 export default class extends Manager {
   pluginWillMount() {
-    console.log('plugin will mount');
     inject(position.SIDEBAR.RIGHT, {
       text: i18n`list.environments`,
       icon: 'fa fa-desktop',
