@@ -16,10 +16,8 @@ export default class extends Manager {
       key: 'env',
       actions: {
         onSidebarActive: () => {
-          console.log('component is active');
         },
         onSidebarDeactive: () => {
-          console.log('component is deactive');
         },
       },
     }, extension => extension.app);
