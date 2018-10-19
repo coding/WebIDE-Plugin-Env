@@ -15,7 +15,6 @@ const { inject, position } = injectComponent;
 
 export default class extends Manager {
   pluginWillMount() {
-    console.log('plugin will mount');
     this.onEnvHide = this.onEnvHide.bind(this)
     this.onEnvShow = this.onEnvShow.bind(this)
     emitter.on(E.TERM_ENV_HIDE, this.onEnvHide)
@@ -40,7 +39,6 @@ export default class extends Manager {
    * @param  {}
    */
   pluginWillUnmount() {
-    console.log('plugin will unMount');
     emitter.removeListener(E.TERM_ENV_HIDE, this.onEnvHide);
     emitter.removeListener(E.TERM_ENV_SHOW, this.onEnvShow);
   }
@@ -163,6 +161,5 @@ export default class extends Manager {
     }
   }
   handleMore = () => {
-    console.log('handleMore')
   }
 }

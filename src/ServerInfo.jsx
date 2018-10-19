@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'lib/propTypes';
 import global from './global';
 const config = global.sdk.config;
 

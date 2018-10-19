@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'lib/react';
+import React, { Component } from 'lib/react';
+import PropTypes from 'lib/propTypes';
 import settings from 'app/settings';
 import { observer } from 'lib/mobxReact';
 import { defaultEnvList } from './api';

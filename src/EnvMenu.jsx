@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'lib/propTypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as EnvActions from './actions';
@@ -162,7 +163,6 @@ class EnvMenu extends Component {
     }
   }
   handleMore = () => {
-    console.log('handleMore')
   }
 }
 

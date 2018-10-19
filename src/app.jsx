@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'lib/propTypes';
 import { Provider } from 'react-redux';
 import { default as EnvList } from './EnvList';
 import global from './global';

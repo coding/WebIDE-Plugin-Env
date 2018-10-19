@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'lib/react';
+import React, { Component } from 'lib/react';
+import PropTypes from 'lib/propTypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { observer } from 'lib/mobxReact';
